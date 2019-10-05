@@ -1,0 +1,19 @@
+imports:
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/clean-code.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/psr12.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/php71.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/symfony.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/symfony-risky.yaml' }
+  - { resource: 'vendor/object-calisthenics/phpcs-calisthenics-rules/config/object-calisthenics.yml' }
+
+services:
+  Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
+    maxCognitiveComplexity: 5
+
+  PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff:
+    complexity: 5
+    absoluteComplexity: 8
+
+parameters:
+  exclude_checkers:
+    - 'PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer'

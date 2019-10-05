@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+    app:
+        build: .
+        working_dir: /var/www
+        environment:
+            TIMEZONE: Europe/Kiev
+            PHP_ENABLE_XDEBUG: 0
+            MESSENGER_TRANSPORT_DSN: amqp://guest:guest@queue:5672/%2f/messages
+        volumes:
+            - .:/var/www:cached
+        ports:
+            - "8000:8000"
+        networks:
+            - webnet
+
+    queue:
+        image: rabbitmq:alpine
+        networks:
+            - webnet
+
+networks:
+    webnet:

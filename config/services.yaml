@@ -1,0 +1,42 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+        bind:
+            $availableSeats: '%env(PLAYGROUND_AVAILABLE_SEATS)'
+            $pricePerSeat: '%env(PRICE_PER_SEAT)'
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\CommandHandler\:
+        namespace: App\Application\CommandHandler\
+        resource: '%kernel.project_dir%/src/Application/CommandHandler/*'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: command.bus }
+
+    App\EventHandler\:
+        namespace: App\Application\EventHandler\
+        resource: '%kernel.project_dir%/src/Application/EventHandler/*'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: event.bus }
+
+    App\QueryHandler\:
+        namespace: App\Application\QueryHandler\
+        resource: '%kernel.project_dir%/src/Application/QueryHandler/*'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: query.bus }
+
+    App\ProcessManager\:
+        namespace: App\Application\ProcessManager\
+        resource: '%kernel.project_dir%/src/Application/ProcessManager/*'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: command.bus }
