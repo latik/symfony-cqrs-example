@@ -1,7 +1,13 @@
 parameters:
-    php_version_features: '7.3'
+    php_version_features: '7.4'
+
+    sets:
+        - 'code-quality'
+        - 'solid'
+        - 'dead-code'
+        - 'php74'
+        - 'symfony44'
 
     exclude_paths:
-        - '/src/Migrations/*'
         - '/tests/*'
         - '/var/*'
