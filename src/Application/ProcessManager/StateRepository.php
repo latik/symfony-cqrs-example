@@ -10,5 +10,5 @@ interface StateRepository
 {
     public function find(UuidInterface $processId): ?State;
 
-    public function save(State $state): void ;
+    public function save(State $state): void;
 }

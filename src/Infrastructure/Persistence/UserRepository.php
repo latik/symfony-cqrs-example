@@ -12,7 +12,7 @@ final class UserRepository implements UserRepositoryInterface
     /**
      * @var User[]
      */
-    private $users = [];
+    private array $users = [];
 
     public function __construct()
     {

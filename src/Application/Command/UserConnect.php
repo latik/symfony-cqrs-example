@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Application\Command;
 
-use App\Shared\CommandInterface;
+use App\Domain\Shared\CommandInterface;
 
+/**
+ * @property-read int $id
+ * @psalm-immutable
+ */
 final class UserConnect implements CommandInterface
 {
-    /**
-     * @var int
-     */
-    public $id;
+    public int $id;
 
     /**
      * @param mixed[] $data

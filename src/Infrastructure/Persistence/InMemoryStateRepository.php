@@ -11,7 +11,7 @@ use Ramsey\Uuid\UuidInterface;
 final class InMemoryStateRepository implements StateRepository
 {
     /** @var State[] */
-    private static $states = [];
+    private static array $states = [];
 
     public function find(UuidInterface $processId): ?State
     {

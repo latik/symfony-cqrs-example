@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace App\Application\ProcessManager;
 
+use DateTimeImmutable;
+use DomainException;
 use Ramsey\Uuid\UuidInterface;
 
 final class State
 {
-    /** @var UuidInterface */
-    private $processId;
+    private UuidInterface $processId;
+    private array $payload = [];
+    private ?DateTimeImmutable $finishedAt;
 
-    /** @var array */
-    private $payload = [];
-
-    /** @var ?\DateTimeImmutable */
-    private $finishedAt;
-
-    private function __construct(UuidInterface $processId, array $payload, ?\DateTimeImmutable $finishedAt)
+    private function __construct(UuidInterface $processId, array $payload, ?DateTimeImmutable $finishedAt)
     {
         $this->payload = $payload;
         $this->processId = $processId;
@@ -31,16 +28,16 @@ final class State
 
     public function apply(array $payload): self
     {
-        if ($this->finishedAt instanceof \DateTimeImmutable) {
-            throw new \DomainException('Can not modify state when its finished');
+        if ($this->finishedAt instanceof DateTimeImmutable) {
+            throw new DomainException('Can not modify state when its finished');
         }
 
-        return new self($this->processId, array_merge($this->payload, $payload), $this->finishedAt);
+        return new self($this->processId, [...$this->payload, ...$payload], $this->finishedAt);
     }
 
     public function done(): self
     {
-        return new self($this->processId, $this->payload, new \DateTimeImmutable());
+        return new self($this->processId, $this->payload, new DateTimeImmutable());
     }
 
     public function has(string $key): bool

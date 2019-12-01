@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Event;
+namespace App\Domain\User;
 
-use App\Shared\EventInterface;
+use App\Domain\Shared\EventInterface;
 
 final class UserConnected implements EventInterface
 {
-    /**
-     * @var int
-     */
-    public $id;
+    public int $id;
 
     /**
      * @param mixed[] $data

@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class AuctionStart implements MessageHandlerInterface
 {
-    private $eventBus;
+    private MessageBusInterface $eventBus;
 
     public function __construct(MessageBusInterface $eventBus)
     {

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
+use InvalidArgumentException;
+
 final class EmailAddress
 {
-    /**
-     * @var string
-     */
-    private $email;
+    private string $email;
 
-    private function __construct($email)
+    private function __construct(string $email)
     {
         $this->email = $email;
     }
@@ -19,7 +18,7 @@ final class EmailAddress
     public static function fromString(string $string): self
     {
         if (!filter_var($string, FILTER_VALIDATE_EMAIL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid email "%s" provided', $string));
+            throw new InvalidArgumentException(sprintf('Invalid email "%s" provided', $string));
         }
 
         return new self($string);

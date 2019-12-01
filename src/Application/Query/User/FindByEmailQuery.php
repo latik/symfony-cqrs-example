@@ -6,16 +6,15 @@ use App\Domain\User\EmailAddress;
 
 final class FindByEmailQuery
 {
-    /**
-     * @var EmailAddress
-     */
-    public $email;
+    private EmailAddress $email;
 
-    /**
-     * @param string $email
-     */
     public function __construct(string $email)
     {
         $this->email = EmailAddress::fromString($email);
+    }
+
+    public function getEmail(): EmailAddress
+    {
+        return $this->email;
     }
 }

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
-use App\Application\Event\UserConnected;
-use App\Shared\EventsRecorderTrait;
+use App\Domain\Shared\EventsRecorderTrait;
 
 final class User
 {
@@ -14,15 +13,9 @@ final class User
     private const CONNECTED = 'connected';
     private const DISCONNECTED = 'disconnected';
 
-    /**
-     * @var int
-     */
-    public $id;
+    public int $id;
 
-    /**
-     * @var string
-     */
-    public $status = self::DISCONNECTED;
+    public string $status = self::DISCONNECTED;
 
     public function connect(): void
     {

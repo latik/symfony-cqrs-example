@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Application\Command;
 
-use App\Shared\CommandInterface;
+use App\Domain\Shared\CommandInterface;
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * @property-read UuidInterface $id
+ * @psalm-immutable
+ */
 final class AuctionStart implements CommandInterface
 {
-    /**
-     * @var UuidInterface
-     */
-    public $id;
+    public UuidInterface $id;
 
     /**
      * @param mixed[] $data

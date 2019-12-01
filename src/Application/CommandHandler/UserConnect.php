@@ -8,22 +8,27 @@ use App\Application\Command\UserConnect as UserConnectCommand;
 use App\Domain\User\User;
 use App\Domain\User\UserRepositoryInterface;
 use InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class UserConnect implements MessageHandlerInterface
 {
-    private $userRepository;
-    private $eventBus;
+    private UserRepositoryInterface $userRepository;
+    private MessageBusInterface $eventBus;
+    private LoggerInterface $logger;
 
-    public function __construct(UserRepositoryInterface $userRepository, MessageBusInterface $eventBus)
+    public function __construct(UserRepositoryInterface $userRepository, MessageBusInterface $eventBus, LoggerInterface $logger)
     {
         $this->userRepository = $userRepository;
         $this->eventBus = $eventBus;
+        $this->logger = $logger;
     }
 
     public function __invoke(UserConnectCommand $command): void
     {
+        $this->logger->info(sprintf('Execute UserConnect command %s', $command->getId()));
+
         /** @var User $user */
         $user = $this->userRepository->find($command->getId());
         if (null === $user) {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Shared;
+namespace App\Domain\Shared;
 
 trait EventsRecorderTrait
 {
     /**
      * @var EventInterface[]
      */
-    private $events = [];
+    private array $events = [];
 
     /**
      * @return EventInterface[]

@@ -23,32 +23,16 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class UserConnectCommand extends Command
 {
+    /**
+     * @var string|null The default command name
+     */
     protected static $defaultName = 'UserConnect';
 
-    /**
-     * @var MessageBusInterface
-     */
-    private $commandBus;
-
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
-
-    /**
-     * @var DenormalizerInterface
-     */
-    private $denormalizer;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
+    private MessageBusInterface $commandBus;
+    private SerializerInterface $serializer;
+    private DenormalizerInterface $denormalizer;
+    private ValidatorInterface $validator;
+    private UserRepositoryInterface $userRepository;
 
     protected function configure()
     {
@@ -73,13 +57,10 @@ final class UserConnectCommand extends Command
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
      * @throws Exception
      * @throws ExceptionInterface
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -102,5 +83,7 @@ final class UserConnectCommand extends Command
 
         $user = $this->userRepository->find($userId);
         $io->write($this->serializer->serialize($user, JsonEncoder::FORMAT));
+
+        return 0;
     }
 }

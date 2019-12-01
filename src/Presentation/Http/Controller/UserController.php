@@ -15,10 +15,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class UserController extends AbstractController
 {
-    private $commandBus;
-    private $denormalizer;
-    private $validator;
-    private $logger;
+    private SerializerInterface $serializer;
+    private UserRepositoryInterface $userRepository;
+    private MessageBusInterface $commandBus;
+    private DenormalizerInterface $denormalizer;
+    private ValidatorInterface $validator;
+    private LoggerInterface $logger;
 
     public function __construct(
         MessageBusInterface $commandBus,

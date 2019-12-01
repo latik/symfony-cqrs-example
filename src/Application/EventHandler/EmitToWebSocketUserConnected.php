@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\EventHandler;
 
-use App\Application\Event\UserConnected;
+use App\Domain\User\UserConnected;
 use App\Domain\User\UserRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -12,9 +12,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 final class EmitToWebSocketUserConnected implements MessageHandlerInterface
 {
-    private $userRepository;
-    private $serializer;
-    private $logger;
+    private UserRepositoryInterface $userRepository;
+    private SerializerInterface $serializer;
+    private LoggerInterface $logger;
 
     public function __construct(
         UserRepositoryInterface $userRepository,

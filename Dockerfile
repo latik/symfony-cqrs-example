@@ -11,7 +11,6 @@ RUN set -eux; \
         postgresql-dev \
     ; \
     \
-    docker-php-ext-configure zip --with-libzip; \
     docker-php-ext-install -j$(nproc) \
         pdo_pgsql \
         bcmath \
