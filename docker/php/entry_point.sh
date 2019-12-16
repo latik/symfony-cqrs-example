@@ -9,5 +9,5 @@ fi
 
 cd /var/www && composer install --optimize-autoloader --no-suggest --no-interaction
 
-#cd /var/www && php ./bin/console server:run 0.0.0.0:8000
+#cd /var/www && php -S 0.0.0.0:8000 -t public/
 cd /var/www && php ./bin/console messenger:consume -vv async
