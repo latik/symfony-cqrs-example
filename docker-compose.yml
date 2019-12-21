@@ -6,7 +6,7 @@ services:
         environment:
             TIMEZONE: Europe/Kiev
             PHP_ENABLE_XDEBUG: 0
-            ENQUEUE_DSN: amqp://guest:guest@queue:5672/%2f
+            ENQUEUE_DSN: kafka://kafka
         volumes:
             - .:/var/www:cached
         ports:
@@ -14,8 +14,10 @@ services:
         networks:
             - webnet
 
-    queue:
-        image: rabbitmq:alpine
+    kafka:
+        image: spotify/kafka
+        environment:
+            KAFKA_ADVERTISED_HOST_NAME: localhost
         networks:
             - webnet
 

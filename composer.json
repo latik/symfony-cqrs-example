@@ -1,7 +1,7 @@
 {
     "require": {
         "php": "^7.4",
-        "enqueue/amqp-bunny": "^0.10",
+        "enqueue/rdkafka": "^0.10",
         "ramsey/uuid": "^4.1",
         "sensio/framework-extra-bundle": "^5.6",
         "sroze/messenger-enqueue-transport": "^0.5.0",

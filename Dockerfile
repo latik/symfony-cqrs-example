@@ -4,7 +4,7 @@ RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \
         postgresql-dev \
-        rabbitmq-c-dev \
+        librdkafka-dev \
     ; \
     \
     docker-php-ext-install -j$(nproc) \
@@ -12,11 +12,11 @@ RUN set -eux; \
         bcmath \
     ; \
     pecl install \
-        amqp \
+        rdkafka-3.1.3 \
     ; \
     pecl clear-cache; \
     docker-php-ext-enable \
-        amqp \
+        rdkafka \
     ; \
     \
     runDeps="$( \
