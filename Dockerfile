@@ -3,30 +3,19 @@ FROM php:alpine
 RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \
-        libpng-dev \
-        libzip-dev \
-        icu-dev \
-        zlib-dev \
-        rabbitmq-c-dev \
         postgresql-dev \
+        rabbitmq-c-dev \
     ; \
     \
     docker-php-ext-install -j$(nproc) \
         pdo_pgsql \
         bcmath \
-        gd \
-        intl \
-        zip \
     ; \
     pecl install \
-        apcu \
         amqp \
-        xdebug \
     ; \
     pecl clear-cache; \
     docker-php-ext-enable \
-        apcu \
-        opcache \
         amqp \
     ; \
     \
@@ -40,20 +29,11 @@ RUN set -eux; \
     \
     apk del .build-deps
 
-# Iconv fix
-RUN apk add --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ gnu-libiconv
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-
 COPY docker/php/php.ini /usr/local/etc/php/php.ini
-
 COPY docker/php/conf.d $PHP_INI_DIR/conf.d
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
-
-RUN set -eux; \
-    composer global require hirak/prestissimo \
-    && composer clear-cache
 
 COPY docker/php/entry_point.sh /entry_point.sh
 
