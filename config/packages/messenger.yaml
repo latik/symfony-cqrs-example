@@ -16,7 +16,7 @@ framework:
                     - validation
 
         transports:
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            async: enqueue://default
 
         routing:
             '*': async

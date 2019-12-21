@@ -6,7 +6,7 @@ services:
         environment:
             TIMEZONE: Europe/Kiev
             PHP_ENABLE_XDEBUG: 0
-            MESSENGER_TRANSPORT_DSN: amqp://guest:guest@queue:5672/%2f/messages
+            ENQUEUE_DSN: amqp://guest:guest@queue:5672/%2f
         volumes:
             - .:/var/www:cached
         ports:
