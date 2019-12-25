@@ -28,12 +28,12 @@ final class UserRepository implements UserRepositoryInterface
 
     public function store(User $user): void
     {
-        $this->users[$user->getId()] = $user;
+        $this->users[$user->id()] = $user;
     }
 
     public function remove(User $user): void
     {
-        unset($this->users[$user->getId()]);
+        unset($this->users[$user->id()]);
     }
 
     public function findBy(array $criteria): ?User

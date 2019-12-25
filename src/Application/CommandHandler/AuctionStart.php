@@ -20,6 +20,6 @@ final class AuctionStart implements MessageHandlerInterface
 
     public function __invoke(AuctionStartCommand $command): void
     {
-        $this->eventBus->dispatch(new AuctionStarted($command->getId()));
+        $this->eventBus->dispatch(new AuctionStarted($command->id()));
     }
 }

@@ -28,7 +28,7 @@ final class AuctionStart implements CommandInterface
         return new self(['id' => $uuid4]);
     }
 
-    public function getId(): UuidInterface
+    public function id(): UuidInterface
     {
         return $this->id;
     }

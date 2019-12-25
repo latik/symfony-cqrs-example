@@ -18,7 +18,7 @@ final class UserConnected implements EventInterface
         $this->id = (int) ($data['id'] ?? null);
     }
 
-    public function getId(): int
+    public function id(): int
     {
         return $this->id;
     }

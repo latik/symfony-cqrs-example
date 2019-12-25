@@ -22,7 +22,7 @@ final class UserConnect implements CommandInterface
         $this->id = (int) ($data['id'] ?? null);
     }
 
-    public function getId(): int
+    public function id(): int
     {
         return $this->id;
     }

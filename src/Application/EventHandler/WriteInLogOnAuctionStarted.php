@@ -19,6 +19,6 @@ final class WriteInLogOnAuctionStarted implements MessageHandlerInterface
 
     public function __invoke(AuctionStarted $event): void
     {
-        $this->logger->info(sprintf('Auction started: %s', $event->getId()->toString()));
+        $this->logger->info(sprintf('Auction started: %s', $event->id()->toString()));
     }
 }

@@ -23,7 +23,7 @@ final class FindByEmail implements QueryHandlerInterface
 
     public function __invoke(FindByEmailQuery $query)
     {
-        $criteria = ['email' => $query->getEmail()];
+        $criteria = ['email' => $query->email()];
         $userView = $this->repository->findBy($criteria);
 
         return $this->serializer->serialize($userView, JsonEncoder::FORMAT);

@@ -27,10 +27,10 @@ final class UserConnect implements MessageHandlerInterface
 
     public function __invoke(UserConnectCommand $command): void
     {
-        $this->logger->info(sprintf('Execute UserConnect command %s', $command->getId()));
+        $this->logger->info(sprintf('Execute UserConnect command %s', $command->id()));
 
         /** @var User $user */
-        $user = $this->userRepository->find($command->getId());
+        $user = $this->userRepository->find($command->id());
         if (null === $user) {
             throw new InvalidArgumentException('User not found');
         }

@@ -13,7 +13,7 @@ final class FindByEmailQuery
         $this->email = EmailAddress::fromString($email);
     }
 
-    public function getEmail(): EmailAddress
+    public function email(): EmailAddress
     {
         return $this->email;
     }

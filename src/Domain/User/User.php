@@ -21,15 +21,15 @@ final class User
     {
         $this->status = self::CONNECTED;
 
-        $this->record(new UserConnected(['id' => $this->getId()]));
+        $this->record(new UserConnected(['id' => $this->id()]));
     }
 
-    public function getId(): int
+    public function id(): int
     {
         return $this->id;
     }
 
-    public function getStatus(): string
+    public function status(): string
     {
         return $this->status;
     }

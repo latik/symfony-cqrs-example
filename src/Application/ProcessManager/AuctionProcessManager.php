@@ -34,9 +34,9 @@ final class AuctionProcessManager implements MessageSubscriberInterface
 
     public function handleThatUserConnected(UserConnected $event): void
     {
-        $user = $this->userRepository->find($event->getId());
+        $user = $this->userRepository->find($event->id());
 
-        $state = State::start(Uuid::uuid4(), [$user->getId()]);
+        $state = State::start(Uuid::uuid4(), [$user->id()]);
 
         $this->stateRepository->save($state);
 

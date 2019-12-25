@@ -20,7 +20,7 @@ final class AuctionStarted implements EventInterface
         $this->id = $id;
     }
 
-    public function getId(): UuidInterface
+    public function id(): UuidInterface
     {
         return $this->id;
     }

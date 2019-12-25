@@ -28,7 +28,7 @@ final class EmitToWebSocketUserConnected implements MessageHandlerInterface
 
     public function __invoke(UserConnected $event): void
     {
-        $user = $this->userRepository->find($event->getId());
+        $user = $this->userRepository->find($event->id());
 
         $userJson = $this->serializer->serialize($user, 'json');
 
