@@ -1,10 +1,5 @@
 imports:
-  - { resource: 'vendor/symplify/easy-coding-standard/config/set/clean-code.yaml' }
-  - { resource: 'vendor/symplify/easy-coding-standard/config/set/psr12.yaml' }
-  - { resource: 'vendor/symplify/easy-coding-standard/config/set/php71.yaml' }
-  - { resource: 'vendor/symplify/easy-coding-standard/config/set/symfony.yaml' }
-  - { resource: 'vendor/symplify/easy-coding-standard/config/set/symfony-risky.yaml' }
-  - { resource: 'vendor/object-calisthenics/phpcs-calisthenics-rules/config/object-calisthenics.yml' }
+    - { resource: 'vendor/object-calisthenics/phpcs-calisthenics-rules/config/object-calisthenics.yml' }
 
 services:
   Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
@@ -15,5 +10,13 @@ services:
     absoluteComplexity: 8
 
 parameters:
-  exclude_checkers:
-    - 'PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer'
+    sets:
+        - 'clean-code'
+        - 'psr12'
+        - 'php71'
+        - 'symfony'
+        - 'symfony-risky'
+
+    skip:
+        PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer: ~
+        PhpCsFixer\Fixer\Phpdoc\PhpdocNoAliasTagFixer: ~
