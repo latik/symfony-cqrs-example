@@ -6,9 +6,7 @@ namespace App\Presentation\Console;
 
 use App\Application\Command\UserConnect;
 use App\Domain\User\UserRepositoryInterface;
-use App\Shared\CommandInterface;
 use Exception;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -64,7 +62,7 @@ final class UserConnectCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $userId = (int)$input->getArgument('id');
+        $userId = (int) $input->getArgument('id');
         $data = array_merge($input->getArguments(), ['id' => $userId]);
 
         $io->write(sprintf('id: %s'.PHP_EOL, $userId));

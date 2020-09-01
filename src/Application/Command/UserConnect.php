@@ -7,7 +7,7 @@ namespace App\Application\Command;
 use App\Domain\Shared\CommandInterface;
 
 /**
- * @property-read int $id
+ * @property int $id
  * @psalm-immutable
  */
 final class UserConnect implements CommandInterface
