@@ -61,7 +61,7 @@
         "phpstan": "phpstan analyse -c phpstan.neon --level max src",
         "psalm": "psalm",
         "cs-check": "ecs check src",
-        "rector": "rector process src -c rector.yaml"
+        "rector": "rector process src"
     },
     "conflict": {
         "symfony/symfony": "*"
