@@ -16,6 +16,7 @@ parameters:
         - 'php71'
         - 'symfony'
         - 'symfony-risky'
+        - 'types'
 
     skip:
         PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer: ~
