@@ -32,7 +32,7 @@ final class UserConnectCommand extends Command
     private ValidatorInterface $validator;
     private UserRepositoryInterface $userRepository;
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Connect user')
