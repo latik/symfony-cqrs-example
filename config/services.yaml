@@ -10,8 +10,12 @@ services:
             $pricePerSeat: '%env(PRICE_PER_SEAT)'
 
     App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
 
     App\CommandHandler\:
         namespace: App\Application\CommandHandler\
