@@ -7,24 +7,24 @@ namespace App\Infrastructure\Persistence;
 use App\Domain\Auction\Auction;
 use App\Domain\Auction\AuctionRepositoryInterface;
 use App\Domain\Shared\UuidInterface;
-use App\Infrastructure\Persistence\InMemory\InMemoryAuctionRepository;
+use App\Infrastructure\Persistence\Doctrine\Repository\AuctionRepository as DoctrineAuctionRepository;
 
 final class AuctionRepository implements AuctionRepositoryInterface
 {
-    private InMemoryAuctionRepository $repository;
+    private DoctrineAuctionRepository $doctrineRepository;
 
-    public function __construct(InMemoryAuctionRepository $repository)
+    public function __construct(DoctrineAuctionRepository $doctrineRepository)
     {
-        $this->repository = $repository;
+        $this->doctrineRepository = $doctrineRepository;
     }
 
-    public function find(UuidInterface $processId): ?Auction
+    public function find($processId): ?Auction
     {
-        return $this->repository->find($processId);
+        return $this->doctrineRepository->find($processId);
     }
 
-    public function save(Auction $state): void
+    public function save(Auction $auction): void
     {
-        $this->repository->save($state);
+        $this->doctrineRepository->persist($auction);
     }
 }

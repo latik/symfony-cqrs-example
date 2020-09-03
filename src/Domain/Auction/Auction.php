@@ -10,18 +10,18 @@ use DomainException;
 
 class Auction
 {
-    private UuidInterface $processId;
+    private $processId;
     private array $payload = [];
     private ?DateTimeImmutable $finishedAt;
 
-    private function __construct(UuidInterface $processId, array $payload, ?DateTimeImmutable $finishedAt)
+    private function __construct($processId, array $payload, ?DateTimeImmutable $finishedAt)
     {
         $this->payload = $payload;
         $this->processId = $processId;
         $this->finishedAt = $finishedAt;
     }
 
-    public static function start(UuidInterface $processId, array $payload): self
+    public static function start($processId, array $payload): self
     {
         return new self($processId, $payload, null);
     }
@@ -45,7 +45,7 @@ class Auction
         return !empty($this->payload[$key]);
     }
 
-    public function processId(): UuidInterface
+    public function processId()
     {
         return $this->processId;
     }

@@ -26,4 +26,9 @@ final class RamseyUuid implements UuidInterface
     {
         return $this->uuid->toString();
     }
+
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
 }
