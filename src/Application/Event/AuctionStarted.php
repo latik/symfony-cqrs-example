@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Event;
 
 use App\Domain\Shared\EventInterface;
-use Ramsey\Uuid\UuidInterface;
+use App\Domain\Shared\UuidInterface;
 
 /**
  * @property UuidInterface $id

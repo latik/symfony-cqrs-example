@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application\ProcessManager;
 
+use App\Domain\Shared\UuidInterface;
 use DateTimeImmutable;
 use DomainException;
-use Ramsey\Uuid\UuidInterface;
 
 final class State
 {

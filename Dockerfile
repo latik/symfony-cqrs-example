@@ -40,4 +40,6 @@ COPY docker/php/entry_point.sh /entry_point.sh
 WORKDIR /var/www
 COPY . /var/www
 
+RUN composer install --optimize-autoloader --no-suggest --no-interaction
+
 ENTRYPOINT ["sh", "/entry_point.sh"]

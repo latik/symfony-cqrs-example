@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\ProcessManager;
 
-use Ramsey\Uuid\UuidInterface;
+use App\Domain\Shared\UuidInterface;
 
 interface StateRepository
 {

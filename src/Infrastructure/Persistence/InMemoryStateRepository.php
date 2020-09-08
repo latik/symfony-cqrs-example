@@ -6,7 +6,7 @@ namespace App\Infrastructure\Persistence;
 
 use App\Application\ProcessManager\State;
 use App\Application\ProcessManager\StateRepository;
-use Ramsey\Uuid\UuidInterface;
+use App\Domain\Shared\UuidInterface;
 
 final class InMemoryStateRepository implements StateRepository
 {

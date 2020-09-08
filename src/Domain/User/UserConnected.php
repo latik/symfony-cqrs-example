@@ -8,18 +8,18 @@ use App\Domain\Shared\EventInterface;
 
 final class UserConnected implements EventInterface
 {
-    public int $id;
+    public int $userId;
 
     /**
      * @param mixed[] $data
      */
     public function __construct(array $data)
     {
-        $this->id = (int) ($data['id'] ?? null);
+        $this->userId = (int) ($data['id'] ?? null);
     }
 
-    public function id(): int
+    public function userId(): int
     {
-        return $this->id;
+        return $this->userId;
     }
 }

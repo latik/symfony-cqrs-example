@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Application\EventHandler;
 
+use App\Domain\Shared\EventHandlerInterface;
+use App\Domain\Shared\SerializerInterface;
 use App\Domain\User\UserConnected;
 use App\Domain\User\UserRepositoryInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
-final class WriteInLogOnUserConnected implements MessageHandlerInterface
+final class WriteInLogOnUserConnected implements EventHandlerInterface
 {
     private UserRepositoryInterface $userRepository;
     private SerializerInterface $serializer;
@@ -28,9 +28,9 @@ final class WriteInLogOnUserConnected implements MessageHandlerInterface
 
     public function __invoke(UserConnected $event): void
     {
-        $user = $this->userRepository->find($event->id());
+        $user = $this->userRepository->find($event->userId());
 
-        $userJson = $this->serializer->serialize($user, 'json');
+        $userJson = $this->serializer->serialize($user, SerializerInterface::JSON_FORMAT);
 
         $this->logger->info(sprintf('User connected: %s', $userJson));
     }

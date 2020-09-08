@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Command;
 
 use App\Domain\Shared\CommandInterface;
-use Ramsey\Uuid\UuidInterface;
+use App\Domain\Shared\UuidInterface;
 
 /**
  * @property UuidInterface $id

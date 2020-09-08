@@ -5,21 +5,23 @@ declare(strict_types=1);
 namespace App\Application\CommandHandler;
 
 use App\Application\Command\UserConnect as UserConnectCommand;
-use App\Domain\User\User;
+use App\Domain\Shared\EventBusInterface;
+use App\Domain\Shared\EventHandlerInterface;
 use App\Domain\User\UserRepositoryInterface;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
-final class UserConnect implements MessageHandlerInterface
+final class UserConnect implements EventHandlerInterface
 {
     private UserRepositoryInterface $userRepository;
-    private MessageBusInterface $eventBus;
+    private EventBusInterface $eventBus;
     private LoggerInterface $logger;
 
-    public function __construct(UserRepositoryInterface $userRepository, MessageBusInterface $eventBus, LoggerInterface $logger)
-    {
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        EventBusInterface $eventBus,
+        LoggerInterface $logger
+    ) {
         $this->userRepository = $userRepository;
         $this->eventBus = $eventBus;
         $this->logger = $logger;
@@ -29,7 +31,6 @@ final class UserConnect implements MessageHandlerInterface
     {
         $this->logger->info(sprintf('Execute UserConnect command %s', $command->id()));
 
-        /** @var User $user */
         $user = $this->userRepository->find($command->id());
         if (null === $user) {
             throw new InvalidArgumentException('User not found');
