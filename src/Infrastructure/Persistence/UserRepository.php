@@ -6,38 +6,34 @@ namespace App\Infrastructure\Persistence;
 
 use App\Domain\User\User;
 use App\Domain\User\UserRepositoryInterface;
+use App\Infrastructure\Persistence\InMemory\InMemoryUserRepository;
 
 final class UserRepository implements UserRepositoryInterface
 {
-    /**
-     * @var User[]
-     */
-    private array $users = [];
+    private InMemoryUserRepository $repository;
 
-    public function __construct()
+    public function __construct(InMemoryUserRepository $repository)
     {
-        $user = new User();
-        $user->id = 42;
-        $this->users[42] = $user;
+        $this->repository = $repository;
     }
 
-    public function find(int $userId): ?User
+    public function find(int $id): ?User
     {
-        return $this->users[$userId] ?? null;
-    }
-
-    public function store(User $user): void
-    {
-        $this->users[$user->id()] = $user;
-    }
-
-    public function remove(User $user): void
-    {
-        unset($this->users[$user->id()]);
+        return $this->repository->find($id);
     }
 
     public function findBy(array $criteria): ?User
     {
-        return $this->users[$criteria['id']] ?? null;
+        return $this->repository->findBy($criteria);
+    }
+
+    public function store(User $user): void
+    {
+        $this->repository->store($user);
+    }
+
+    public function remove(User $user): void
+    {
+        $this->repository->remove($user);
     }
 }

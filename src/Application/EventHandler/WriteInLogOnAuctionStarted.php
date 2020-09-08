@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Application\EventHandler;
 
 use App\Application\Event\AuctionStarted;
+use App\Domain\Shared\EventHandlerInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class WriteInLogOnAuctionStarted implements MessageHandlerInterface
+final class WriteInLogOnAuctionStarted implements EventHandlerInterface
 {
     private LoggerInterface $logger;
 

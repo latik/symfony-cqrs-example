@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence;
+namespace App\Infrastructure\Persistence\InMemory;
 
-use App\Application\ProcessManager\State;
-use App\Application\ProcessManager\StateRepository;
-use Ramsey\Uuid\UuidInterface;
+use App\Domain\Auction\Auction;
+use App\Domain\Shared\UuidInterface;
 
-final class InMemoryStateRepository implements StateRepository
+final class InMemoryAuctionRepository
 {
-    /** @var State[] */
+    /** @var Auction[] */
     private static array $states = [];
 
-    public function find(UuidInterface $processId): ?State
+    public function find(UuidInterface $processId): ?Auction
     {
         if (!$this->hasState($processId)) {
             return null;
@@ -22,7 +21,7 @@ final class InMemoryStateRepository implements StateRepository
         return self::$states[$processId->toString()];
     }
 
-    public function save(State $state): void
+    public function save(Auction $state): void
     {
         self::$states[$state->processId()->toString()] = $state;
     }

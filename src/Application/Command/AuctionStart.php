@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Command;
 
 use App\Domain\Shared\CommandInterface;
-use Ramsey\Uuid\UuidInterface;
+use App\Domain\Shared\UuidInterface;
 
 /**
  * @property-read UuidInterface $id
@@ -18,12 +18,12 @@ final class AuctionStart implements CommandInterface
     /**
      * @param mixed[] $data
      */
-    public function __construct(array $data = [])
+    private function __construct(array $data = [])
     {
-        $this->id = ($data['id'] ?? null);
+        $this->id = $data['id'] ?? null;
     }
 
-    public static function create(UuidInterface $uuid4)
+    public static function create(UuidInterface $uuid4): self
     {
         return new self(['id' => $uuid4]);
     }

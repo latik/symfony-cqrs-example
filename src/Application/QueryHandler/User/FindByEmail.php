@@ -6,9 +6,8 @@ namespace App\Application\QueryHandler\User;
 
 use App\Application\Query\User\FindByEmailQuery;
 use App\Domain\Shared\QueryHandlerInterface;
+use App\Domain\Shared\SerializerInterface;
 use App\Domain\User\UserRepositoryInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\SerializerInterface;
 
 final class FindByEmail implements QueryHandlerInterface
 {
@@ -26,6 +25,6 @@ final class FindByEmail implements QueryHandlerInterface
         $criteria = ['email' => $query->email()];
         $userView = $this->repository->findBy($criteria);
 
-        return $this->serializer->serialize($userView, JsonEncoder::FORMAT);
+        return $this->serializer->serialize($userView, SerializerInterface::JSON_FORMAT);
     }
 }

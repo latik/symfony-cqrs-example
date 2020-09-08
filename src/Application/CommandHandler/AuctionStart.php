@@ -6,14 +6,14 @@ namespace App\Application\CommandHandler;
 
 use App\Application\Command\AuctionStart as AuctionStartCommand;
 use App\Application\Event\AuctionStarted;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
+use App\Domain\Shared\CommandHandlerInterface;
+use App\Domain\Shared\EventBusInterface;
 
-final class AuctionStart implements MessageHandlerInterface
+final class AuctionStart implements CommandHandlerInterface
 {
-    private MessageBusInterface $eventBus;
+    private EventBusInterface $eventBus;
 
-    public function __construct(MessageBusInterface $eventBus)
+    public function __construct(EventBusInterface $eventBus)
     {
         $this->eventBus = $eventBus;
     }
