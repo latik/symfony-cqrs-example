@@ -6,7 +6,7 @@ namespace App\Domain\User;
 
 use App\Domain\Shared\EventsRecorderTrait;
 
-final class User
+class User
 {
     use EventsRecorderTrait;
 

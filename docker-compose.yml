@@ -7,15 +7,25 @@ services:
             TIMEZONE: Europe/Kiev
             PHP_ENABLE_XDEBUG: 0
             MESSENGER_TRANSPORT_DSN: amqp://guest:guest@queue:5672/%2f/messages
+            MONGODB_URL: mongodb://mongo:27017
+            MONGODB_DB: symfony
         volumes:
             - .:/var/www:cached
         ports:
             - "8000:8000"
+        depends_on:
+            - mongo
+            - queue
         networks:
             - webnet
 
     queue:
         image: rabbitmq:alpine
+        networks:
+            - webnet
+
+    mongo:
+        image: mongo
         networks:
             - webnet
 

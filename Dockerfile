@@ -13,10 +13,12 @@ RUN set -eux; \
     ; \
     pecl install \
         amqp \
+        mongodb \
     ; \
     pecl clear-cache; \
     docker-php-ext-enable \
         amqp \
+        mongodb \
     ; \
     \
     runDeps="$( \

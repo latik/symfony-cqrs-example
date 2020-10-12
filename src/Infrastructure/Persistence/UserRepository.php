@@ -6,34 +6,34 @@ namespace App\Infrastructure\Persistence;
 
 use App\Domain\User\User;
 use App\Domain\User\UserRepositoryInterface;
-use App\Infrastructure\Persistence\InMemory\InMemoryUserRepository;
+use App\Infrastructure\Persistence\Doctrine\Repository\UserRepository as DoctrineUserRepository;
 
 final class UserRepository implements UserRepositoryInterface
 {
-    private InMemoryUserRepository $repository;
+    private DoctrineUserRepository $doctrineRepository;
 
-    public function __construct(InMemoryUserRepository $repository)
+    public function __construct(DoctrineUserRepository $doctrineRepository)
     {
-        $this->repository = $repository;
+        $this->doctrineRepository = $doctrineRepository;
     }
 
     public function find(int $id): ?User
     {
-        return $this->repository->find($id);
+        return $this->doctrineRepository->find($id);
     }
 
     public function findBy(array $criteria): ?User
     {
-        return $this->repository->findBy($criteria);
+        return $this->doctrineRepository->findBy($criteria);
     }
 
     public function store(User $user): void
     {
-        $this->repository->store($user);
+        $this->doctrineRepository->persist($user);
     }
 
     public function remove(User $user): void
     {
-        $this->repository->remove($user);
+        $this->doctrineRepository->remove($user);
     }
 }
