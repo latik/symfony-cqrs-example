@@ -1,0 +1,22 @@
+name: Psalm checks
+
+on:
+    push
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  coverage: "none"
+                  php-version: "8.0"
+
+            - uses: ramsey/composer-install@v1
+
+            - name: Psalm checks
+              run: vendor/bin/psalm
