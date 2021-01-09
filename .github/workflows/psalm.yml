@@ -1,0 +1,21 @@
+name: Psalm checks
+
+on:
+    push
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  coverage: "none"
+
+            - uses: ramsey/composer-install@v2
+
+            - name: Psalm checks
+              run: vendor/bin/psalm --show-info=false --stats --output-format=github

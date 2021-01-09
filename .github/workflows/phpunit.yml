@@ -1,0 +1,21 @@
+name: PHP Unitest
+
+on:
+    push
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  coverage: "none"
+
+            - uses: ramsey/composer-install@v2
+
+            - name: PHPUnit tests
+              run: vendor/bin/phpunit

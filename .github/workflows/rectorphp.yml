@@ -1,0 +1,22 @@
+name: Rector checks
+
+on:
+    push
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  coverage: "none"
+                  extensions: mbstring, pdo_pgsql, bcmath, amqp, mongodb
+
+            - uses: ramsey/composer-install@v2
+
+            - name: Rector checks
+              run: vendor/bin/rector process --dry-run
