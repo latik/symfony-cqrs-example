@@ -20,6 +20,6 @@ composer.lock
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 
-###> sensiolabs-de/deptrac-shim ###
+###> qossmic/deptrac-shim ###
 /.deptrac.cache
-###< sensiolabs-de/deptrac-shim ###
+###< qossmic/deptrac-shim ###
