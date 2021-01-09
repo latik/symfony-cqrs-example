@@ -50,17 +50,12 @@ final class UserCreateCommand extends Command
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $userId = (int)$input->getArgument('id');
+        $userId = (int) $input->getArgument('id');
         $data = array_merge($input->getArguments(), ['id' => $userId]);
 
-        $output->writeln(sprintf('id: %s' . PHP_EOL, $userId));
+        $output->writeln(sprintf('id: %s'.PHP_EOL, $userId));
 
         /** @var UserCreate $command */
         $command = $this->denormalizer->denormalize($data, UserCreate::class);
@@ -69,6 +64,7 @@ final class UserCreateCommand extends Command
 
         if (0 !== $violations->count()) {
             $output->writeln($this->serializer->serialize($violations, SerializerInterface::JSON_FORMAT));
+
             return Command::FAILURE;
         }
 

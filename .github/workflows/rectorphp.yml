@@ -1,0 +1,38 @@
+name: Rector checks
+
+on:
+    push
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                php-version: ['7.4', '8.0']
+
+        name: PHP ${{ matrix.php-version }} Test
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   name: Set up PHP
+                uses: shivammathur/setup-php@master
+                with:
+                    php-version: ${{ matrix.php-version }}
+                    extensions: mbstring, pdo_pgsql, bcmath, amqp, mongodb
+                    tools: cs2pr
+
+            -   uses: actions/cache@v2
+                with:
+                    path: |
+                        ~/.composer/cache
+                        vendor
+                    key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
+
+            -   name: Install dependencies
+                run: composer install --prefer-dist --no-progress --ansi
+
+            -   name: Rector checks
+                run: vendor/bin/rector process --config=rector.php --dry-run

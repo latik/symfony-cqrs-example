@@ -22,7 +22,7 @@ final class UserRepository implements UserRepositoryInterface
         return $this->doctrineRepository->find($id);
     }
 
-    public function findBy(array $criteria): ?User
+    public function findBy(array $criteria): array
     {
         return $this->doctrineRepository->findBy($criteria);
     }

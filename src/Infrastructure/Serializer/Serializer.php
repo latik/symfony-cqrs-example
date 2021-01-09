@@ -16,6 +16,9 @@ final class Serializer implements SerializerInterface
         $this->serializer = $serializer;
     }
 
+    /**
+     * @return string
+     */
     public function serialize($data, string $format, array $context = [])
     {
         return $this->serializer->serialize($data, $format, $context);

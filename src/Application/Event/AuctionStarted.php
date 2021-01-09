@@ -8,7 +8,7 @@ use App\Domain\Shared\EventInterface;
 use App\Domain\Shared\UuidInterface;
 
 /**
- * @property-read UuidInterface $id
+ * @property UuidInterface $id
  * @psalm-immutable
  */
 final class AuctionStarted implements EventInterface

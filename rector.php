@@ -18,7 +18,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         Option::SETS,
         [
             SetList::CODE_QUALITY,
-            SetList::SOLID,
             SetList::DEAD_CODE,
             SetList::PHP_74,
             SetList::SYMFONY_44,
@@ -32,9 +31,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     );
 
     // is there a file you need to skip?
-    $parameters->set(Option::EXCLUDE_PATHS, [
-        __DIR__ . '/tests/*',
-        __DIR__ . '/var/*',
+    $parameters->set(Option::SKIP, [
+        __DIR__.'/tests/*',
+        __DIR__.'/var/*',
     ]);
 
     // get services
