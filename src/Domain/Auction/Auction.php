@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Auction;
 
-use App\Domain\Shared\UuidInterface;
 use DateTimeImmutable;
 use DomainException;
 

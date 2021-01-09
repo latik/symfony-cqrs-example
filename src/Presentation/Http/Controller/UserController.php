@@ -15,8 +15,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class UserController extends AbstractController
 {
-    private SerializerInterface $serializer;
-    private UserRepositoryInterface $userRepository;
     private MessageBusInterface $commandBus;
     private DenormalizerInterface $denormalizer;
     private ValidatorInterface $validator;
