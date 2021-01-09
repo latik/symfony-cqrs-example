@@ -50,11 +50,6 @@ final class UserCreateCommand extends Command
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $userId = (int)$input->getArgument('id');
@@ -69,6 +64,7 @@ final class UserCreateCommand extends Command
 
         if (0 !== $violations->count()) {
             $output->writeln($this->serializer->serialize($violations, SerializerInterface::JSON_FORMAT));
+
             return Command::FAILURE;
         }
 

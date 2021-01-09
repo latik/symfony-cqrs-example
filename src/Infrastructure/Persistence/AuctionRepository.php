@@ -6,7 +6,6 @@ namespace App\Infrastructure\Persistence;
 
 use App\Domain\Auction\Auction;
 use App\Domain\Auction\AuctionRepositoryInterface;
-use App\Domain\Shared\UuidInterface;
 use App\Infrastructure\Persistence\Doctrine\Repository\AuctionRepository as DoctrineAuctionRepository;
 
 final class AuctionRepository implements AuctionRepositoryInterface

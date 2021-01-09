@@ -56,7 +56,8 @@ final class AuctionProcessManager implements MessageSubscriberInterface
         $user = $this->userRepository->find($event->userId());
 
         if (null === $user) {
-            $this->logger->info(sprintf('User with userId: %s not found', $user->id()));
+            $this->logger->info(sprintf('User with userId: %s not found', $event->userId()));
+
             return;
         }
 
