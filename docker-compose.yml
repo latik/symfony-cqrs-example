@@ -1,25 +1,35 @@
 version: '3.5'
+
+x-app-template: &app-template
+    image: cqrs-example_app:latest
+    build: .
+    working_dir: /var/www
+    environment:
+        TIMEZONE: Europe/Kiev
+        MESSENGER_TRANSPORT_DSN: amqp://guest:guest@queue:5672/%2f/messages
+        DATABASE_URL: pgsql://postgres:admin@database:5432/symfony
+        MONGODB_URL: mongodb://mongo:27017
+        MONGODB_DB: symfony
+    volumes:
+        - .:/var/www:cached
+    depends_on:
+        - database
+        - mongo
+        - queue
+    networks:
+        - webnet
+
 services:
     app:
-        build: .
-        working_dir: /var/www
-        environment:
-            TIMEZONE: Europe/Kiev
-            PHP_ENABLE_XDEBUG: 0
-            MESSENGER_TRANSPORT_DSN: amqp://guest:guest@queue:5672/%2f/messages
-            DATABASE_URL: pgsql://postgres:admin@database:5432/symfony
-            MONGODB_URL: mongodb://mongo:27017
-            MONGODB_DB: symfony
-        volumes:
-            - .:/var/www:cached
+        << : *app-template
         ports:
             - "8000:8000"
-        depends_on:
-            - database
-            - mongo
-            - queue
-        networks:
-            - webnet
+        entrypoint: /usr/local/bin/php -S 0.0.0.0:8000 -t /var/www/public/ /var/www/public/index.php
+
+    worker:
+        <<: *app-template
+        entrypoint: /usr/local/bin/php
+        command: /var/www/bin/console messenger:consume -vv async
 
     queue:
         image: rabbitmq:alpine
