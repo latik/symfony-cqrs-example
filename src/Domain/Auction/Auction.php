@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Auction;
 
+use App\Domain\Shared\EventsRecorderTrait;
 use App\Domain\Shared\UuidInterface;
 use DateTimeImmutable;
 use DomainException;
 
 class Auction
 {
-    private $processId;
-    private array $payload = [];
+    use EventsRecorderTrait;
+
+    private UuidInterface $processId;
+    private array $payload;
     private ?DateTimeImmutable $finishedAt;
 
-    private function __construct($processId, array $payload, ?DateTimeImmutable $finishedAt)
+    private function __construct(UuidInterface $processId, array $payload, ?DateTimeImmutable $finishedAt)
     {
         $this->payload = $payload;
         $this->processId = $processId;
@@ -23,7 +26,10 @@ class Auction
 
     public static function start($processId, array $payload): self
     {
-        return new self($processId, $payload, null);
+        $instance = new self($processId, $payload, null);
+        $instance->record(new AuctionStarted($processId));
+
+        return $instance;
     }
 
     public function apply(array $payload): self
@@ -45,7 +51,7 @@ class Auction
         return !empty($this->payload[$key]);
     }
 
-    public function processId()
+    public function processId(): UuidInterface
     {
         return $this->processId;
     }

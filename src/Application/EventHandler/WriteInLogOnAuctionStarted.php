@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\EventHandler;
 
-use App\Application\Event\AuctionStarted;
+use App\Domain\Auction\AuctionStarted;
 use App\Domain\Shared\EventHandlerInterface;
 use Psr\Log\LoggerInterface;
 

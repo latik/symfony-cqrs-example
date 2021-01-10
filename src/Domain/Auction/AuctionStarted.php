@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Event;
+namespace App\Domain\Auction;
 
 use App\Domain\Shared\EventInterface;
 use App\Domain\Shared\UuidInterface;

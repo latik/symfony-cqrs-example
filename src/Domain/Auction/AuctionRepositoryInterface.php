@@ -10,5 +10,5 @@ interface AuctionRepositoryInterface
 {
     public function find(UuidInterface $processId): ?Auction;
 
-    public function save(Auction $state): void;
+    public function save(Auction $auction): void;
 }

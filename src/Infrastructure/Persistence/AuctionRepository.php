@@ -18,7 +18,7 @@ final class AuctionRepository implements AuctionRepositoryInterface
         $this->doctrineRepository = $doctrineRepository;
     }
 
-    public function find($processId): ?Auction
+    public function find(UuidInterface $processId): ?Auction
     {
         return $this->doctrineRepository->find($processId);
     }

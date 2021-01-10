@@ -5,21 +5,39 @@ declare(strict_types=1);
 namespace App\Application\CommandHandler;
 
 use App\Application\Command\AuctionStart as AuctionStartCommand;
-use App\Application\Event\AuctionStarted;
+use App\Domain\Auction\Auction;
+use App\Domain\Auction\AuctionRepositoryInterface;
 use App\Domain\Shared\CommandHandlerInterface;
 use App\Domain\Shared\EventBusInterface;
+use Psr\Log\LoggerInterface;
 
 final class AuctionStart implements CommandHandlerInterface
 {
+    private LoggerInterface $logger;
     private EventBusInterface $eventBus;
+    private AuctionRepositoryInterface $auctionRepository;
 
-    public function __construct(EventBusInterface $eventBus)
-    {
+    public function __construct(
+        LoggerInterface $logger,
+        EventBusInterface $eventBus,
+        AuctionRepositoryInterface $auctionRepository
+    ) {
         $this->eventBus = $eventBus;
+        $this->auctionRepository = $auctionRepository;
+        $this->logger = $logger;
     }
 
     public function __invoke(AuctionStartCommand $command): void
     {
-        $this->eventBus->dispatch(new AuctionStarted($command->id()));
+        $this->logger->info(sprintf('Try start process %s', $command->id()->toString()));
+
+        $auction = Auction::start($command->id(), [$command->userId()]);
+
+        $this->auctionRepository->save($auction);
+
+        $events = $auction->releaseEvents();
+        foreach ($events as $event) {
+            $this->eventBus->dispatch($event);
+        }
     }
 }
