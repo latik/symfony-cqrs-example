@@ -8,7 +8,10 @@ interface UserRepositoryInterface
 {
     public function find(int $id): ?User;
 
-    public function findBy(array $criteria): ?User;
+    /**
+     * @return array<User>
+     */
+    public function findBy(array $criteria): array;
 
     public function store(User $user): void;
 
