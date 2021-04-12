@@ -13,11 +13,11 @@ class Auction
 {
     use EventsRecorderTrait;
 
-    private UuidInterface $processId;
+    private $processId;
     private array $payload;
     private ?DateTimeImmutable $finishedAt;
 
-    private function __construct(UuidInterface $processId, array $payload, ?DateTimeImmutable $finishedAt)
+    private function __construct($processId, array $payload, ?DateTimeImmutable $finishedAt)
     {
         $this->payload = $payload;
         $this->processId = $processId;
@@ -51,7 +51,7 @@ class Auction
         return !empty($this->payload[$key]);
     }
 
-    public function processId(): UuidInterface
+    public function processId()
     {
         return $this->processId;
     }
