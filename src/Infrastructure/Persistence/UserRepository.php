@@ -6,7 +6,7 @@ namespace App\Infrastructure\Persistence;
 
 use App\Domain\User\User;
 use App\Domain\User\UserRepositoryInterface;
-use App\Infrastructure\Persistence\Doctrine\Repository\UserRepository as DoctrineUserRepository;
+use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as DoctrineUserRepository;
 
 final class UserRepository implements UserRepositoryInterface
 {

@@ -8,7 +8,7 @@ use App\Domain\User\User;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
 
-final class UserRepository extends ServiceDocumentRepository
+final class MongoUserRepository extends ServiceDocumentRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
