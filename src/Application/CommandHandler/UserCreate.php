@@ -14,18 +14,11 @@ use Psr\Log\LoggerInterface;
 
 final class UserCreate implements EventHandlerInterface
 {
-    private UserRepositoryInterface $userRepository;
-    private EventBusInterface $eventBus;
-    private LoggerInterface $logger;
-
     public function __construct(
-        UserRepositoryInterface $userRepository,
-        EventBusInterface $eventBus,
-        LoggerInterface $logger
+        private UserRepositoryInterface $userRepository,
+        private EventBusInterface $eventBus,
+        private LoggerInterface $logger
     ) {
-        $this->userRepository = $userRepository;
-        $this->eventBus = $eventBus;
-        $this->logger = $logger;
     }
 
     public function __invoke(UserCreateCommand $command): void

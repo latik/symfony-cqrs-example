@@ -10,11 +10,8 @@ use Ramsey\Uuid\UuidInterface as RamseyUuidInterface;
 
 final class RamseyUuid implements UuidInterface
 {
-    private RamseyUuidInterface $uuid;
-
-    private function __construct(RamseyUuidInterface $uuid)
+    private function __construct(private RamseyUuidInterface $uuid)
     {
-        $this->uuid = $uuid;
     }
 
     public static function uuid4(): self

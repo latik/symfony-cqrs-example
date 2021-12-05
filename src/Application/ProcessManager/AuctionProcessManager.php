@@ -15,18 +15,11 @@ use Psr\Log\LoggerInterface;
 
 final class AuctionProcessManager implements MessageSubscriberInterface
 {
-    private CommandBusInterface $commandBus;
-    private UuidFactoryInterface $uuidFactory;
-    private LoggerInterface $logger;
-
     public function __construct(
-        CommandBusInterface $commandBus,
-        UuidFactoryInterface $uuidFactory,
-        LoggerInterface $logger
+        private CommandBusInterface $commandBus,
+        private UuidFactoryInterface $uuidFactory,
+        private LoggerInterface $logger
     ) {
-        $this->logger = $logger;
-        $this->uuidFactory = $uuidFactory;
-        $this->commandBus = $commandBus;
     }
 
     public function __invoke(EventInterface $event)

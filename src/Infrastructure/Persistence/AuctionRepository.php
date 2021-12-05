@@ -11,11 +11,8 @@ use App\Infrastructure\Persistence\Doctrine\Repository\AuctionRepository as Doct
 
 final class AuctionRepository implements AuctionRepositoryInterface
 {
-    private DoctrineAuctionRepository $doctrineRepository;
-
-    public function __construct(DoctrineAuctionRepository $doctrineRepository)
+    public function __construct(private DoctrineAuctionRepository $doctrineRepository)
     {
-        $this->doctrineRepository = $doctrineRepository;
     }
 
     public function find(UuidInterface $processId): ?Auction

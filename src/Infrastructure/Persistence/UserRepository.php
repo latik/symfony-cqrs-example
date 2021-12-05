@@ -10,11 +10,8 @@ use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as Doct
 
 final class UserRepository implements UserRepositoryInterface
 {
-    private DoctrineUserRepository $doctrineRepository;
-
-    public function __construct(DoctrineUserRepository $doctrineRepository)
+    public function __construct(private DoctrineUserRepository $doctrineRepository)
     {
-        $this->doctrineRepository = $doctrineRepository;
     }
 
     public function find(int $id): ?User

@@ -9,11 +9,8 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as SymfonyDeno
 
 final class Normalizer implements DenormalizerInterface
 {
-    private SymfonyDenormalizerInterface $denormalizer;
-
-    public function __construct(SymfonyDenormalizerInterface $denormalizer)
+    public function __construct(private SymfonyDenormalizerInterface $denormalizer)
     {
-        $this->denormalizer = $denormalizer;
     }
 
     public function denormalize($data, string $type, string $format = null, array $context = [])

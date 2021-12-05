@@ -8,11 +8,8 @@ use InvalidArgumentException;
 
 final class EmailAddress
 {
-    private string $email;
-
-    private function __construct(string $email)
+    private function __construct(private string $email)
     {
-        $this->email = $email;
     }
 
     public static function fromString(string $string): self

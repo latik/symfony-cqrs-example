@@ -22,12 +22,6 @@ final class UserConnectCommand extends Command
      */
     protected static $defaultName = 'UserConnect';
 
-    private CommandBusInterface $commandBus;
-    private SerializerInterface $serializer;
-    private DenormalizerInterface $denormalizer;
-    private ValidatorInterface $validator;
-    private UserRepositoryInterface $userRepository;
-
     /**
      * @return void
      */
@@ -39,18 +33,13 @@ final class UserConnectCommand extends Command
     }
 
     public function __construct(
-        CommandBusInterface $commandBus,
-        DenormalizerInterface $denormalizer,
-        ValidatorInterface $validator,
-        SerializerInterface $serializer,
-        UserRepositoryInterface $userRepository
+        private CommandBusInterface $commandBus,
+        private DenormalizerInterface $denormalizer,
+        private ValidatorInterface $validator,
+        private SerializerInterface $serializer,
+        private UserRepositoryInterface $userRepository
     ) {
         parent::__construct(static::$defaultName);
-        $this->commandBus = $commandBus;
-        $this->denormalizer = $denormalizer;
-        $this->validator = $validator;
-        $this->serializer = $serializer;
-        $this->userRepository = $userRepository;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

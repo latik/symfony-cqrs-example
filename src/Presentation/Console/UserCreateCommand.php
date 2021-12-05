@@ -22,12 +22,6 @@ final class UserCreateCommand extends Command
      */
     protected static $defaultName = 'UserCreate';
 
-    private CommandBusInterface $commandBus;
-    private SerializerInterface $serializer;
-    private DenormalizerInterface $denormalizer;
-    private ValidatorInterface $validator;
-    private UserRepositoryInterface $userRepository;
-
     protected function configure(): void
     {
         $this
@@ -36,18 +30,12 @@ final class UserCreateCommand extends Command
     }
 
     public function __construct(
-        CommandBusInterface $commandBus,
-        DenormalizerInterface $denormalizer,
-        ValidatorInterface $validator,
-        SerializerInterface $serializer,
-        UserRepositoryInterface $userRepository
+        private CommandBusInterface $commandBus,
+        private DenormalizerInterface $denormalizer,
+        private ValidatorInterface $validator,
+        private SerializerInterface $serializer,
     ) {
         parent::__construct(static::$defaultName);
-        $this->commandBus = $commandBus;
-        $this->denormalizer = $denormalizer;
-        $this->validator = $validator;
-        $this->serializer = $serializer;
-        $this->userRepository = $userRepository;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
