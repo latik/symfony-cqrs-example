@@ -16,8 +16,8 @@ trait EventsRecorderTrait
      */
     public function releaseEvents(): array
     {
-        [$events, $this->events] = [$this->events, []];
-
+        $events = $this->events;
+        $this->events = [];
         return $events;
     }
 

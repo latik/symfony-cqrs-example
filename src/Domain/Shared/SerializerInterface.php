@@ -6,7 +6,7 @@ namespace App\Domain\Shared;
 
 interface SerializerInterface
 {
-    public const JSON_FORMAT = 'json';
+    public final const JSON_FORMAT = 'json';
 
     public function serialize($data, string $format, array $context = []);
 }

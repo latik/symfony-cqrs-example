@@ -13,18 +13,11 @@ use Psr\Log\LoggerInterface;
 
 final class AuctionStart implements CommandHandlerInterface
 {
-    private LoggerInterface $logger;
-    private EventBusInterface $eventBus;
-    private AuctionRepositoryInterface $auctionRepository;
-
     public function __construct(
-        LoggerInterface $logger,
-        EventBusInterface $eventBus,
-        AuctionRepositoryInterface $auctionRepository
+        private readonly LoggerInterface $logger,
+        private readonly EventBusInterface $eventBus,
+        private readonly AuctionRepositoryInterface $auctionRepository
     ) {
-        $this->eventBus = $eventBus;
-        $this->auctionRepository = $auctionRepository;
-        $this->logger = $logger;
     }
 
     public function __invoke(AuctionStartCommand $command): void

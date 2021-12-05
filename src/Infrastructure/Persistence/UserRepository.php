@@ -10,11 +10,8 @@ use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as Doct
 
 final class UserRepository implements UserRepositoryInterface
 {
-    private DoctrineUserRepository $doctrineRepository;
-
-    public function __construct(DoctrineUserRepository $doctrineRepository)
+    public function __construct(private readonly DoctrineUserRepository $doctrineRepository)
     {
-        $this->doctrineRepository = $doctrineRepository;
     }
 
     public function find(int $id): ?User
@@ -22,6 +19,9 @@ final class UserRepository implements UserRepositoryInterface
         return $this->doctrineRepository->find($id);
     }
 
+    /**
+     * @return User[]
+     */
     public function findBy(array $criteria): array
     {
         return $this->doctrineRepository->findBy($criteria);

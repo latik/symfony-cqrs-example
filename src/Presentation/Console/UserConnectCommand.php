@@ -9,48 +9,33 @@ use App\Domain\Shared\CommandBusInterface;
 use App\Domain\Shared\DenormalizerInterface;
 use App\Domain\Shared\SerializerInterface;
 use App\Domain\User\UserRepositoryInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[AsCommand(
+    name: 'app:user-connect',
+    description: 'Connect user',
+)]
 final class UserConnectCommand extends Command
 {
-    /**
-     * @var string|null The default command name
-     */
-    protected static $defaultName = 'UserConnect';
-
-    private CommandBusInterface $commandBus;
-    private SerializerInterface $serializer;
-    private DenormalizerInterface $denormalizer;
-    private ValidatorInterface $validator;
-    private UserRepositoryInterface $userRepository;
-
-    /**
-     * @return void
-     */
-    protected function configure()
+    protected function configure(): void
     {
         $this
-            ->setDescription('Connect user')
             ->addArgument('id', InputArgument::REQUIRED, 'The user ID');
     }
 
     public function __construct(
-        CommandBusInterface $commandBus,
-        DenormalizerInterface $denormalizer,
-        ValidatorInterface $validator,
-        SerializerInterface $serializer,
-        UserRepositoryInterface $userRepository
+        private readonly CommandBusInterface $commandBus,
+        private readonly DenormalizerInterface $denormalizer,
+        private readonly ValidatorInterface $validator,
+        private readonly SerializerInterface $serializer,
+        private readonly UserRepositoryInterface $userRepository
     ) {
         parent::__construct(static::$defaultName);
-        $this->commandBus = $commandBus;
-        $this->denormalizer = $denormalizer;
-        $this->validator = $validator;
-        $this->serializer = $serializer;
-        $this->userRepository = $userRepository;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

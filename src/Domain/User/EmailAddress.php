@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Domain\User;
 
 use InvalidArgumentException;
+use Stringable;
 
-final class EmailAddress
+final class EmailAddress implements Stringable
 {
-    private string $email;
-
-    private function __construct(string $email)
+    private function __construct(private readonly string $email)
     {
-        $this->email = $email;
     }
 
     public static function fromString(string $string): self
@@ -22,5 +20,10 @@ final class EmailAddress
         }
 
         return new self($string);
+    }
+
+    public function __toString(): string
+    {
+        return $this->email;
     }
 }

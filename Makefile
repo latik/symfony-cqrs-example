@@ -19,7 +19,7 @@ vendors: ## install composer dependencies
 
 db: ## reset the database
 	$(SYMFONY) doctrine:database:drop --if-exists --force
-	$(SYMFONY) doctrine:database:create
+	$(SYMFONY) doctrine:database:create --if-not-exists
 	$(SYMFONY) doctrine:schema:create
 
 shell: ## start shell in the app container

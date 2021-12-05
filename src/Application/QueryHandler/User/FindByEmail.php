@@ -11,13 +11,8 @@ use App\Domain\User\UserRepositoryInterface;
 
 final class FindByEmail implements QueryHandlerInterface
 {
-    private UserRepositoryInterface $repository;
-    private SerializerInterface $serializer;
-
-    public function __construct(UserRepositoryInterface $repository, SerializerInterface $serializer)
+    public function __construct(private readonly UserRepositoryInterface $repository, private readonly SerializerInterface $serializer)
     {
-        $this->repository = $repository;
-        $this->serializer = $serializer;
     }
 
     public function __invoke(FindByEmailQuery $query)

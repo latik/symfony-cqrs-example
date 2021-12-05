@@ -15,29 +15,25 @@ use Psr\Log\LoggerInterface;
 
 final class AuctionProcessManager implements MessageSubscriberInterface
 {
-    private CommandBusInterface $commandBus;
-    private UuidFactoryInterface $uuidFactory;
-    private LoggerInterface $logger;
-
     public function __construct(
-        CommandBusInterface $commandBus,
-        UuidFactoryInterface $uuidFactory,
-        LoggerInterface $logger
+        private readonly CommandBusInterface $commandBus,
+        private readonly UuidFactoryInterface $uuidFactory,
+        private readonly LoggerInterface $logger
     ) {
-        $this->logger = $logger;
-        $this->uuidFactory = $uuidFactory;
-        $this->commandBus = $commandBus;
     }
 
     public function __invoke(EventInterface $event)
     {
         foreach (self::getHandledMessages() as $className => $config) {
-            if ($className === \get_class($event)) {
+            if ($className === $event::class) {
                 self::{$config['method']}($event);
             }
         }
     }
 
+    /**
+     * @return \Iterator<array<string, string>>
+     */
     public static function getHandledMessages(): iterable
     {
         yield UserConnected::class => ['method' => 'handleThatUserConnected', 'bus' => 'event.bus'];

@@ -9,17 +9,11 @@ use Symfony\Component\Serializer\SerializerInterface as SymfonySerializerInterfa
 
 final class Serializer implements SerializerInterface
 {
-    private SymfonySerializerInterface $serializer;
-
-    public function __construct(SymfonySerializerInterface $serializer)
+    public function __construct(private readonly SymfonySerializerInterface $serializer)
     {
-        $this->serializer = $serializer;
     }
 
-    /**
-     * @return string
-     */
-    public function serialize($data, string $format, array $context = [])
+    public function serialize($data, string $format, array $context = []): string
     {
         return $this->serializer->serialize($data, $format, $context);
     }

@@ -1,57 +1,29 @@
 paths:
-  - ./src
+    - ./src
 exclude_files:
-  - .*test.*
-
+    - '#.*test.*#'
 layers:
-  - name: Domain
-    collectors:
-      - type: className
-        regex: ^App\\Domain\\.*
-  - name: Application
-    collectors:
-      - type: className
-        regex: ^App\\Application\\.*
-  - name: Infrastructure
-    collectors:
-      - type: className
-        regex: ^App\\Infrastructure\\.*
-  - name: Presentation
-    collectors:
-      - type: className
-        regex: ^App\\Presentation\\.*
-  - name: Psr
-    collectors:
-      - type: className
-        regex: ^Psr\\.*
-  - name: Other Vendors
-    collectors:
-      - type: bool
-        must:
-          # must be outside of global namespace
-          - type: className
-            regex: '[\\]+'
-        must_not:
-          # must not be one of the known vendors
-          - type: className
-            regex: ^App\\(Domain|Application|Infrastructure|Presentation)\\.*
-          - type: className
-            regex: ^Psr\\.*
-
+    -
+        name: Controller
+        collectors:
+            -
+                type: className
+                regex: .*Controller.*
+    -
+        name: Repository
+        collectors:
+            -
+                type: className
+                regex: .*Repository.*
+    -
+        name: Service
+        collectors:
+            -
+                type: className
+                regex: .*Service.*
 ruleset:
-  Domain:
-    - Psr
-  Application:
-    - Domain
-    - Psr
-  Infrastructure:
-    - Domain
-    - Application
-    - Other Vendors
-    - Psr
-  Presentation:
-    - Domain
-    - Application
-    - Infrastructure
-    - Psr
-    - Other Vendors
+    Controller:
+        - Service
+    Service:
+        - Repository
+    Repository:

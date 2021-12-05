@@ -12,18 +12,11 @@ use Psr\Log\LoggerInterface;
 
 final class EmitToWebSocketUserConnected implements EventHandlerInterface
 {
-    private UserRepositoryInterface $userRepository;
-    private SerializerInterface $serializer;
-    private LoggerInterface $logger;
-
     public function __construct(
-        UserRepositoryInterface $userRepository,
-        SerializerInterface $serializer,
-        LoggerInterface $logger
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly SerializerInterface $serializer,
+        private readonly LoggerInterface $logger
     ) {
-        $this->logger = $logger;
-        $this->userRepository = $userRepository;
-        $this->serializer = $serializer;
     }
 
     public function __invoke(UserConnected $event): void

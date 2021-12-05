@@ -3,42 +3,34 @@
 declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
-use Rector\Php74\Rector\Property\TypedPropertyRector;
+use Rector\Core\ValueObject\PhpVersion;
+use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\Set\SymfonyLevelSetList;
+use Rector\Symfony\Set\SymfonySetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // get parameters
     $parameters = $containerConfigurator->parameters();
 
-    $parameters->set(Option::PHP_VERSION_FEATURES, '7.4');
+    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_81);
 
-    // here we can define, what sets of rules will be applied
-    $parameters->set(
-        Option::SETS,
-        [
-            SetList::CODE_QUALITY,
-            SetList::DEAD_CODE,
-            SetList::PHP_74,
-            SetList::SYMFONY_44,
-            SetList::SYMFONY_50,
-            SetList::SYMFONY_50_TYPES,
-            SetList::SYMFONY_CODE_QUALITY,
-            SetList::SYMFONY_CONSTRUCTOR_INJECTION,
-            SetList::DOCTRINE_SERVICES,
-            SetList::TYPE_DECLARATION,
-        ]
-    );
-
-    // is there a file you need to skip?
-    $parameters->set(Option::SKIP, [
-        __DIR__.'/tests/*',
-        __DIR__.'/var/*',
+    $parameters->set(Option::PATHS, [
+        __DIR__ . '/src',
     ]);
 
-    // get services
-    $services = $containerConfigurator->services();
-
-    // register single rule
-    $services->set(TypedPropertyRector::class);
+    $containerConfigurator->import(LevelSetList::UP_TO_PHP_81);
+    $containerConfigurator->import(SetList::CODE_QUALITY);
+    $containerConfigurator->import(SetList::DEAD_CODE);
+    $containerConfigurator->import(SetList::TYPE_DECLARATION);
+    $containerConfigurator->import(SetList::EARLY_RETURN);
+    $containerConfigurator->import(SymfonyLevelSetList::UP_TO_SYMFONY_54);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_54);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_CODE_QUALITY);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_STRICT);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_CODE_QUALITY);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_ORM_29);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_ODM_23);
+    $containerConfigurator->import(DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES);
 };

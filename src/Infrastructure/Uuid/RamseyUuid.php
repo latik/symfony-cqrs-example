@@ -7,14 +7,12 @@ namespace App\Infrastructure\Uuid;
 use App\Domain\Shared\UuidInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface as RamseyUuidInterface;
+use Stringable;
 
-final class RamseyUuid implements UuidInterface
+final class RamseyUuid implements UuidInterface, Stringable
 {
-    private RamseyUuidInterface $uuid;
-
-    private function __construct(RamseyUuidInterface $uuid)
+    private function __construct(private readonly RamseyUuidInterface $uuid)
     {
-        $this->uuid = $uuid;
     }
 
     public static function uuid4(): self

@@ -13,18 +13,11 @@ use Psr\Log\LoggerInterface;
 
 final class UserConnect implements EventHandlerInterface
 {
-    private UserRepositoryInterface $userRepository;
-    private EventBusInterface $eventBus;
-    private LoggerInterface $logger;
-
     public function __construct(
-        UserRepositoryInterface $userRepository,
-        EventBusInterface $eventBus,
-        LoggerInterface $logger
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly EventBusInterface $eventBus,
+        private readonly LoggerInterface $logger
     ) {
-        $this->userRepository = $userRepository;
-        $this->eventBus = $eventBus;
-        $this->logger = $logger;
     }
 
     public function __invoke(UserConnectCommand $command): void
@@ -32,7 +25,7 @@ final class UserConnect implements EventHandlerInterface
         $this->logger->info(sprintf('Execute UserConnect command %s', $command->id()));
 
         $user = $this->userRepository->find($command->id());
-        if (null === $user) {
+        if (!$user instanceof \App\Domain\User\User) {
             throw new InvalidArgumentException('User not found');
         }
 

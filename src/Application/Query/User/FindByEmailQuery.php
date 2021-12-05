@@ -6,7 +6,7 @@ use App\Domain\User\EmailAddress;
 
 final class FindByEmailQuery
 {
-    private EmailAddress $email;
+    private readonly EmailAddress $email;
 
     public function __construct(string $email)
     {

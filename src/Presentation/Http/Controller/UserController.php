@@ -15,27 +15,16 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class UserController extends AbstractController
 {
-    private MessageBusInterface $commandBus;
-    private DenormalizerInterface $denormalizer;
-    private ValidatorInterface $validator;
-    private LoggerInterface $logger;
-
     public function __construct(
-        MessageBusInterface $commandBus,
-        DenormalizerInterface $denormalizer,
-        ValidatorInterface $validator,
-        LoggerInterface $logger
+        private readonly MessageBusInterface $commandBus,
+        private readonly DenormalizerInterface $denormalizer,
+        private readonly ValidatorInterface $validator,
+        private readonly LoggerInterface $logger
     ) {
-        $this->commandBus = $commandBus;
-        $this->logger = $logger;
-        $this->denormalizer = $denormalizer;
-        $this->validator = $validator;
     }
 
-    /**
-     * @Route("/", name="connect")
-     */
-    public function connect(): JsonResponse
+    #[Route(path: '/', name: 'connect')]
+    public function connect() : JsonResponse
     {
         $data = ['id' => 42];
 
