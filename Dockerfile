@@ -3,6 +3,7 @@ FROM php:alpine
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
 RUN install-php-extensions \
+    pcntl \
     pdo_pgsql \
     mongodb \
     opcache \

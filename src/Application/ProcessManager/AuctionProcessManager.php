@@ -34,7 +34,7 @@ final class AuctionProcessManager implements MessageSubscriberInterface
     /**
      * @return \Iterator<array<string, string>>
      */
-    public static function getHandledMessages(): iterable
+    public static function getHandledMessages(): \Iterator
     {
         yield UserConnected::class => ['method' => 'handleThatUserConnected', 'bus' => 'event.bus'];
     }

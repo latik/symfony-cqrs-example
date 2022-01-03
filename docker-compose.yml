@@ -42,9 +42,12 @@ services:
             - webnet
 
     database:
-        image: postgres:alpine
+        image: postgres:${POSTGRES_VERSION:-14}-alpine
         environment:
-            POSTGRES_PASSWORD: admin
+          POSTGRES_DB: ${POSTGRES_DB:-app}
+          # You should definitely change the password in production
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+          POSTGRES_USER: ${POSTGRES_USER:-symfony}
         networks:
             - webnet
 
