@@ -8,18 +8,16 @@ use App\Domain\Shared\CommandInterface;
 use App\Domain\Shared\UuidInterface;
 
 /**
- * @property-read UuidInterface $id
- * @property-read int $userId
  * @psalm-immutable
  */
 final class AuctionStart implements CommandInterface
 {
-    public UuidInterface $id;
+    public readonly UuidInterface $id;
 
-    public int $userId;
+    public readonly int $userId;
 
     /**
-     * @param mixed[] $data
+     * @param array{id:UuidInterface, userId:int} $data
      */
     private function __construct(array $data = [])
     {
@@ -30,15 +28,5 @@ final class AuctionStart implements CommandInterface
     public static function create(UuidInterface $uuid4, int $userId): self
     {
         return new self(['id' => $uuid4, 'userId' => $userId]);
-    }
-
-    public function id(): UuidInterface
-    {
-        return $this->id;
-    }
-
-    public function userId(): int
-    {
-        return $this->userId;
     }
 }

@@ -45,6 +45,6 @@ final class AuctionProcessManager implements MessageSubscriberInterface
 
         $this->logger->info(sprintf('Try start process %s', $processId->toString()));
 
-        $this->commandBus->dispatch(AuctionStart::create($processId, $event->userId()));
+        $this->commandBus->dispatch(AuctionStart::create($processId, $event->userId));
     }
 }

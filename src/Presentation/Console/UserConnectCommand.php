@@ -35,12 +35,12 @@ final class UserConnectCommand extends Command
         private readonly SerializerInterface $serializer,
         private readonly UserRepositoryInterface $userRepository
     ) {
-        parent::__construct(static::$defaultName);
+        parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $userId = (int) $input->getArgument('id');
+        $userId = (string) $input->getArgument('id');
         $data = array_merge($input->getArguments(), ['id' => $userId]);
 
         $output->writeln(sprintf('id: %s'.PHP_EOL, $userId));

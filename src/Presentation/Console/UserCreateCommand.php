@@ -33,7 +33,7 @@ final class UserCreateCommand extends Command
         private readonly ValidatorInterface $validator,
         private readonly SerializerInterface $serializer,
     ) {
-        parent::__construct(static::$defaultName);
+        parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

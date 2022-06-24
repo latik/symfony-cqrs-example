@@ -11,13 +11,15 @@ use App\Domain\User\UserRepositoryInterface;
 
 final class FindByEmail implements QueryHandlerInterface
 {
-    public function __construct(private readonly UserRepositoryInterface $repository, private readonly SerializerInterface $serializer)
-    {
+    public function __construct(
+        private readonly UserRepositoryInterface $repository,
+        private readonly SerializerInterface $serializer,
+    ) {
     }
 
     public function __invoke(FindByEmailQuery $query)
     {
-        $criteria = ['email' => $query->email()];
+        $criteria = ['email' => $query->email];
         $userView = $this->repository->findBy($criteria);
 
         return $this->serializer->serialize($userView, SerializerInterface::JSON_FORMAT);

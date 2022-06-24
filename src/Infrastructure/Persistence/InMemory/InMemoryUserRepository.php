@@ -20,12 +20,12 @@ final class InMemoryUserRepository
 
     public function store(User $user): void
     {
-        $this->users[$user->id()] = $user;
+        $this->users[$user->id->toString()] = $user;
     }
 
     public function remove(User $user): void
     {
-        unset($this->users[$user->id()]);
+        unset($this->users[$user->id->toString()]);
     }
 
     public function findBy(array $criteria): ?User
