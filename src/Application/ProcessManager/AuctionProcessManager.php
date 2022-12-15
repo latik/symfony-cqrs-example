@@ -13,12 +13,12 @@ use App\Domain\User\UserConnected;
 use App\Domain\User\UserRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
-final class AuctionProcessManager implements MessageSubscriberInterface
+final readonly class AuctionProcessManager implements MessageSubscriberInterface
 {
     public function __construct(
-        private readonly CommandBusInterface $commandBus,
-        private readonly UuidFactoryInterface $uuidFactory,
-        private readonly LoggerInterface $logger
+        private CommandBusInterface $commandBus,
+        private UuidFactoryInterface $uuidFactory,
+        private LoggerInterface $logger
     ) {
     }
 

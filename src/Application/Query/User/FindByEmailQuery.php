@@ -4,9 +4,9 @@ namespace App\Application\Query\User;
 
 use App\Domain\User\EmailAddress;
 
-final class FindByEmailQuery
+final readonly class FindByEmailQuery
 {
-    public readonly EmailAddress $email;
+    public EmailAddress $email;
 
     public function __construct(string $email)
     {

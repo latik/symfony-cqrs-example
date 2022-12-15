@@ -40,7 +40,7 @@ final class UserConnectCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $userId = (string) $input->getArgument('id');
+        $userId = (int) $input->getArgument('id');
         $data = array_merge($input->getArguments(), ['id' => $userId]);
 
         $output->writeln(sprintf('id: %s'.PHP_EOL, $userId));

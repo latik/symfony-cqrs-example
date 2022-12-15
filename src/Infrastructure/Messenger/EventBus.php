@@ -8,9 +8,9 @@ use App\Domain\Shared\EventBusInterface;
 use App\Domain\Shared\EventInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class EventBus implements EventBusInterface
+final readonly class EventBus implements EventBusInterface
 {
-    public function __construct(private readonly MessageBusInterface $eventBus)
+    public function __construct(private MessageBusInterface $eventBus)
     {
     }
 

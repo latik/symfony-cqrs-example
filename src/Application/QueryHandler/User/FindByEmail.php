@@ -9,11 +9,11 @@ use App\Domain\Shared\QueryHandlerInterface;
 use App\Domain\Shared\SerializerInterface;
 use App\Domain\User\UserRepositoryInterface;
 
-final class FindByEmail implements QueryHandlerInterface
+final readonly class FindByEmail implements QueryHandlerInterface
 {
     public function __construct(
-        private readonly UserRepositoryInterface $repository,
-        private readonly SerializerInterface $serializer,
+        private UserRepositoryInterface $repository,
+        private SerializerInterface $serializer,
     ) {
     }
 

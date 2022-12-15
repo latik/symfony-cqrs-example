@@ -9,9 +9,9 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface as RamseyUuidInterface;
 use Stringable;
 
-final class RamseyUuid implements UuidInterface, Stringable
+final readonly class RamseyUuid implements UuidInterface, Stringable
 {
-    private function __construct(private readonly RamseyUuidInterface $uuid)
+    private function __construct(private RamseyUuidInterface $uuid)
     {
     }
 

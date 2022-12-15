@@ -7,9 +7,9 @@ namespace App\Domain\User;
 use InvalidArgumentException;
 use Stringable;
 
-final class EmailAddress implements Stringable
+final readonly class EmailAddress implements Stringable
 {
-    private function __construct(private readonly string $email)
+    private function __construct(private string $email)
     {
     }
 

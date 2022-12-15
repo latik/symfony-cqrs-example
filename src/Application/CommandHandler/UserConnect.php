@@ -12,20 +12,20 @@ use App\Domain\User\UserRepositoryInterface;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
-final class UserConnect implements EventHandlerInterface
+final readonly class UserConnect implements EventHandlerInterface
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository,
-        private readonly EventBusInterface $eventBus,
-        private readonly LoggerInterface $logger
+        private UserRepositoryInterface $userRepository,
+        private EventBusInterface $eventBus,
+        private LoggerInterface $logger,
     ) {
     }
 
     public function __invoke(UserConnectCommand $command): void
     {
-        $this->logger->info(sprintf('Execute UserConnect command %s', $command->id()));
+        $this->logger->info(sprintf('Execute UserConnect command %s', $command->id));
 
-        $user = $this->userRepository->find($command->id());
+        $user = $this->userRepository->find($command->id);
         if (!$user instanceof User) {
             throw new InvalidArgumentException('User not found');
         }

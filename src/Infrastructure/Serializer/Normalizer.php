@@ -7,9 +7,9 @@ namespace App\Infrastructure\Serializer;
 use App\Domain\Shared\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as SymfonyDenormalizerInterface;
 
-final class Normalizer implements DenormalizerInterface
+final readonly class Normalizer implements DenormalizerInterface
 {
-    public function __construct(private readonly SymfonyDenormalizerInterface $denormalizer)
+    public function __construct(private SymfonyDenormalizerInterface $denormalizer)
     {
     }
 

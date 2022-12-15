@@ -11,20 +11,20 @@ use App\Domain\Shared\CommandHandlerInterface;
 use App\Domain\Shared\EventBusInterface;
 use Psr\Log\LoggerInterface;
 
-final class AuctionStart implements CommandHandlerInterface
+final readonly class AuctionStart implements CommandHandlerInterface
 {
     public function __construct(
-        private readonly LoggerInterface $logger,
-        private readonly EventBusInterface $eventBus,
-        private readonly AuctionRepositoryInterface $auctionRepository
+        private LoggerInterface $logger,
+        private EventBusInterface $eventBus,
+        private AuctionRepositoryInterface $auctionRepository,
     ) {
     }
 
     public function __invoke(AuctionStartCommand $command): void
     {
-        $this->logger->info(sprintf('Try start process %s', $command->id()->toString()));
+        $this->logger->info(sprintf('Try start process %s', $command->id->toString()));
 
-        $auction = Auction::start($command->id(), [$command->userId()]);
+        $auction = Auction::start($command->id, [$command->userId]);
 
         $this->auctionRepository->save($auction);
 

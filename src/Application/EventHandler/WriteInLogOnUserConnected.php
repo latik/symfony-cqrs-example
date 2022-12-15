@@ -10,18 +10,18 @@ use App\Domain\User\UserConnected;
 use App\Domain\User\UserRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
-final class WriteInLogOnUserConnected implements EventHandlerInterface
+final readonly class WriteInLogOnUserConnected implements EventHandlerInterface
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository,
-        private readonly SerializerInterface $serializer,
-        private readonly LoggerInterface $logger
+        private UserRepositoryInterface $userRepository,
+        private SerializerInterface $serializer,
+        private LoggerInterface $logger
     ) {
     }
 
     public function __invoke(UserConnected $event): void
     {
-        $user = $this->userRepository->find($event->userId());
+        $user = $this->userRepository->find($event->userId);
 
         $userJson = $this->serializer->serialize($user, SerializerInterface::JSON_FORMAT);
 

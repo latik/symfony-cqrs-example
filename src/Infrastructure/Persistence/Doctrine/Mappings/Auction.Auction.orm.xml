@@ -5,8 +5,7 @@
 
     <entity name="App\Domain\Auction\Auction">
         <id name="processId" column="processId" type="uuid">
-            <generator strategy="CUSTOM"/>
-            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+            <generator strategy="NONE"/>
         </id>
         <field name="payload" column="payload" type="array"/>
         <field name="finishedAt" column="finishedAt" type="datetime_immutable" nullable="true"/>

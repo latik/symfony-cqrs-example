@@ -8,9 +8,9 @@ use App\Domain\User\User;
 use App\Domain\User\UserRepositoryInterface;
 use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as DoctrineUserRepository;
 
-final class UserRepository implements UserRepositoryInterface
+final readonly class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(private readonly DoctrineUserRepository $doctrineRepository)
+    public function __construct(private DoctrineUserRepository $doctrineRepository)
     {
     }
 

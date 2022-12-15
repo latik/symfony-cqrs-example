@@ -7,15 +7,9 @@ namespace App\Domain\User;
 use App\Domain\Shared\EventInterface;
 use App\Domain\Shared\UuidInterface;
 
-final class UserCreated implements EventInterface
+final readonly class UserCreated implements EventInterface
 {
-    public readonly UuidInterface $userId;
-
-    /**
-     * @param mixed[] $data
-     */
-    public function __construct(array $data)
+    public function __construct(public int $userId)
     {
-        $this->userId = $data['id'] ?? null;
     }
 }

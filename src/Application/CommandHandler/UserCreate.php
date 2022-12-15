@@ -12,25 +12,25 @@ use App\Domain\User\UserRepositoryInterface;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
-final class UserCreate implements EventHandlerInterface
+final readonly class UserCreate implements EventHandlerInterface
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository,
-        private readonly EventBusInterface $eventBus,
-        private readonly LoggerInterface $logger
+        private UserRepositoryInterface $userRepository,
+        private EventBusInterface $eventBus,
+        private LoggerInterface $logger,
     ) {
     }
 
     public function __invoke(UserCreateCommand $command): void
     {
-        $this->logger->info(sprintf('Execute UserCreate command %s', $command->id()));
+        $this->logger->info(sprintf('Execute UserCreate command %s', $command->id));
 
-        $userExist = null !== $this->userRepository->find($command->id());
+        $userExist = null !== $this->userRepository->find($command->id);
         if ($userExist) {
             throw new InvalidArgumentException('User already exist');
         }
 
-        $user = User::create($command->id());
+        $user = User::create($command->id);
 
         $this->userRepository->store($user);
 

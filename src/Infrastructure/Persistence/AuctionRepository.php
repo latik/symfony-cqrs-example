@@ -9,9 +9,9 @@ use App\Domain\Auction\AuctionRepositoryInterface;
 use App\Domain\Shared\UuidInterface;
 use App\Infrastructure\Persistence\Doctrine\Repository\AuctionRepository as DoctrineAuctionRepository;
 
-final class AuctionRepository implements AuctionRepositoryInterface
+final readonly class AuctionRepository implements AuctionRepositoryInterface
 {
-    public function __construct(private readonly DoctrineAuctionRepository $doctrineRepository)
+    public function __construct(private DoctrineAuctionRepository $doctrineRepository)
     {
     }
 

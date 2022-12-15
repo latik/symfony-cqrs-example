@@ -13,15 +13,17 @@ class User
     private const CONNECTED = 'connected';
     private const DISCONNECTED = 'disconnected';
 
-    public int $id;
-
     public string $status = self::DISCONNECTED;
+
+    private function __construct(public readonly int $id)
+    {
+    }
 
     public static function create(int $id): self
     {
-        $instance = new self();
-        $instance->id = $id;
-        $instance->record(new UserCreated(['id' => $instance->id()]));
+        $instance = new self(id: $id);
+
+        $instance->record(new UserCreated(userId: $instance->id));
 
         return $instance;
     }
@@ -30,12 +32,7 @@ class User
     {
         $this->status = self::CONNECTED;
 
-        $this->record(new UserConnected(['id' => $this->id()]));
-    }
-
-    public function id(): int
-    {
-        return $this->id;
+        $this->record(new UserConnected(userId: $this->id));
     }
 
     public function status(): string
