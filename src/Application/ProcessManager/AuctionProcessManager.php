@@ -8,15 +8,15 @@ use App\Application\Command\AuctionStart;
 use App\Domain\Shared\CommandBusInterface;
 use App\Domain\Shared\EventInterface;
 use App\Domain\Shared\MessageSubscriberInterface;
-use App\Domain\Shared\UuidFactoryInterface;
 use App\Domain\User\UserConnected;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Uid\Factory\UuidFactory;
 
 final readonly class AuctionProcessManager implements MessageSubscriberInterface
 {
     public function __construct(
         private CommandBusInterface $commandBus,
-        private UuidFactoryInterface $uuidFactory,
+        private UuidFactory $uuidFactory,
         private LoggerInterface $logger
     ) {
     }
@@ -41,9 +41,9 @@ final readonly class AuctionProcessManager implements MessageSubscriberInterface
 
     public function handleThatUserConnected(UserConnected $event): void
     {
-        $processId = $this->uuidFactory->generateUuid4();
+        $processId = $this->uuidFactory->create();
 
-        $this->logger->info(\sprintf('Try start process %s', $processId->toString()));
+        $this->logger->info(\sprintf('Try start process %s', $processId));
 
         $this->commandBus->dispatch(AuctionStart::create($processId, $event->userId));
     }

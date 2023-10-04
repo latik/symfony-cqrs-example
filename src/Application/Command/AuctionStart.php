@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Application\Command;
 
 use App\Domain\Shared\CommandInterface;
-use App\Domain\Shared\UuidInterface;
+use Symfony\Component\Uid\AbstractUid;
 
 final readonly class AuctionStart implements CommandInterface
 {
     public function __construct(
-        public UuidInterface $id,
-        public int $userId,
+        public AbstractUid $id,
+        public AbstractUid $userId,
     ) {
     }
 
-    public static function create(UuidInterface $uuid4, int $userId): self
+    public static function create(AbstractUid $uuid, AbstractUid $userId): self
     {
-        return new self(id: $uuid4, userId: $userId);
+        return new self(id: $uuid, userId: $userId);
     }
 }

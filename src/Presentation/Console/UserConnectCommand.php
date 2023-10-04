@@ -6,7 +6,6 @@ namespace App\Presentation\Console;
 
 use App\Application\Command\UserConnect;
 use App\Domain\Shared\CommandBusInterface;
-use App\Domain\Shared\DenormalizerInterface;
 use App\Domain\Shared\SerializerInterface;
 use App\Domain\User\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -14,6 +13,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[AsCommand(
@@ -30,7 +30,6 @@ final class UserConnectCommand extends Command
 
     public function __construct(
         private readonly CommandBusInterface $commandBus,
-        private readonly DenormalizerInterface $denormalizer,
         private readonly ValidatorInterface $validator,
         private readonly SerializerInterface $serializer,
         private readonly UserRepositoryInterface $userRepository
@@ -40,13 +39,13 @@ final class UserConnectCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $userId = (int) $input->getArgument('id');
-        $data = array_merge($input->getArguments(), ['id' => $userId]);
+        $uuid = (string) $input->getArgument('id');
 
-        $output->writeln(\sprintf('id: %s'.PHP_EOL, $userId));
+        $output->writeln(\sprintf('id: %s'.PHP_EOL, $uuid));
 
-        /** @var UserConnect $command */
-        $command = $this->denormalizer->denormalize($data, UserConnect::class);
+        $userId = Uuid::fromString($uuid);
+
+        $command = new UserConnect($userId);
 
         $violations = $this->validator->validate($command);
 

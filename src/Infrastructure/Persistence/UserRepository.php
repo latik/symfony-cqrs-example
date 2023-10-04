@@ -6,15 +6,16 @@ namespace App\Infrastructure\Persistence;
 
 use App\Domain\User\User;
 use App\Domain\User\UserRepositoryInterface;
-use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as DoctrineUserRepository;
+use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as Repository;
+use Symfony\Component\Uid\AbstractUid;
 
 final readonly class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(private DoctrineUserRepository $doctrineRepository)
+    public function __construct(private Repository $doctrineRepository)
     {
     }
 
-    public function find(int $id): ?User
+    public function find(AbstractUid $id): ?User
     {
         return $this->doctrineRepository->find($id);
     }

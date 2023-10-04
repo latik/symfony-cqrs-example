@@ -8,19 +8,20 @@ use App\Domain\Shared\EventsRecorderTrait;
 use App\Domain\Shared\UuidInterface;
 use DateTimeImmutable;
 use DomainException;
+use Symfony\Component\Uid\AbstractUid;
 
 class Auction
 {
     use EventsRecorderTrait;
 
     private function __construct(
-        private readonly UuidInterface $processId,
+        private readonly AbstractUid $processId,
         private readonly array $payload,
         private readonly ?DateTimeImmutable $finishedAt = null,
     ) {
     }
 
-    public static function start(UuidInterface $processId, array $payload): self
+    public static function start(AbstractUid $processId, array $payload): self
     {
         $instance = new self(processId: $processId, payload: $payload);
         $instance->record(new AuctionStarted($processId));
@@ -47,7 +48,7 @@ class Auction
         return !empty($this->payload[$key]);
     }
 
-    public function processId(): UuidInterface
+    public function processId(): AbstractUid
     {
         return $this->processId;
     }

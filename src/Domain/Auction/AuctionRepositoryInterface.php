@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Auction;
 
-use App\Domain\Shared\UuidInterface;
+use Symfony\Component\Uid\AbstractUid;
 
 interface AuctionRepositoryInterface
 {
-    public function find(UuidInterface $processId): ?Auction;
+    public function find(AbstractUid $processId): ?Auction;
 
     public function save(Auction $auction): void;
 }

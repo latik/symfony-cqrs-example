@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\InMemory;
 
 use App\Domain\Auction\Auction;
-use App\Domain\Shared\UuidInterface;
+use Symfony\Component\Uid\AbstractUid;
 
 final class InMemoryAuctionRepository
 {
     /** @var Auction[] */
     private static array $states = [];
 
-    public function find(UuidInterface $processId): ?Auction
+    public function find(AbstractUid $processId): ?Auction
     {
-        if (!$this->hasState($processId)) {
+        if (!$this->hasState($processId->__toString())) {
             return null;
         }
 
-        return self::$states[$processId->toString()];
+        return self::$states[$processId->__toString()];
     }
 
     public function save(Auction $state): void
     {
-        self::$states[$state->processId()->toString()] = $state;
+        self::$states[$state->processId()->__toString()] = $state;
     }
 
     public function reset(): void
@@ -31,8 +31,8 @@ final class InMemoryAuctionRepository
         self::$states = [];
     }
 
-    private function hasState(UuidInterface $processId): bool
+    private function hasState(string $processId): bool
     {
-        return isset(self::$states[$processId->toString()]);
+        return isset(self::$states[$processId]);
     }
 }

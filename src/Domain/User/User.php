@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\User;
 
 use App\Domain\Shared\EventsRecorderTrait;
+use Symfony\Component\Uid\AbstractUid;
 
 class User
 {
@@ -15,11 +16,11 @@ class User
 
     public string $status = self::DISCONNECTED;
 
-    private function __construct(public readonly int $id)
+    private function __construct(public AbstractUid $id)
     {
     }
 
-    public static function create(int $id): self
+    public static function create(AbstractUid $id): self
     {
         $instance = new self(id: $id);
 

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
+use Symfony\Component\Uid\AbstractUid;
+
 interface UserRepositoryInterface
 {
-    public function find(int $id): ?User;
+    public function find(AbstractUid $id): ?User;
 
     /**
      * @return array<User>
