@@ -36,7 +36,7 @@ final class UserController extends AbstractController
             return $this->json(['msg' => 'Not valid id'], 400);
         }
 
-        $this->logger->info(sprintf('User %s try to connect', $command->id));
+        $this->logger->info(\sprintf('User %s try to connect', $command->id));
 
         $this->commandBus->dispatch($command);
 

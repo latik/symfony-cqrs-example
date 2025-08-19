@@ -25,6 +25,6 @@ final readonly class EmitToWebSocketUserConnected implements EventHandlerInterfa
 
         $userJson = $this->serializer->serialize($user, SerializerInterface::JSON_FORMAT);
 
-        $this->logger->info(sprintf('New mutation - user connected: %s', $userJson));
+        $this->logger->info(\sprintf('New mutation - user connected: %s', $userJson));
     }
 }

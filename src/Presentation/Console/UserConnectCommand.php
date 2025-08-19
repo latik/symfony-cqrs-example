@@ -43,7 +43,7 @@ final class UserConnectCommand extends Command
         $userId = (int) $input->getArgument('id');
         $data = array_merge($input->getArguments(), ['id' => $userId]);
 
-        $output->writeln(sprintf('id: %s'.PHP_EOL, $userId));
+        $output->writeln(\sprintf('id: %s'.PHP_EOL, $userId));
 
         /** @var UserConnect $command */
         $command = $this->denormalizer->denormalize($data, UserConnect::class);

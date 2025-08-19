@@ -41,7 +41,7 @@ final class UserCreateCommand extends Command
         $userId = (int) $input->getArgument('id');
         $data = array_merge($input->getArguments(), ['id' => $userId]);
 
-        $output->writeln(sprintf('id: %s'.PHP_EOL, $userId));
+        $output->writeln(\sprintf('id: %s'.PHP_EOL, $userId));
 
         /** @var UserCreate $command */
         $command = $this->denormalizer->denormalize($data, UserCreate::class);

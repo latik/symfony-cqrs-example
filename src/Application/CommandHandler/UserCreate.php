@@ -23,7 +23,7 @@ final readonly class UserCreate implements EventHandlerInterface
 
     public function __invoke(UserCreateCommand $command): void
     {
-        $this->logger->info(sprintf('Execute UserCreate command %s', $command->id));
+        $this->logger->info(\sprintf('Execute UserCreate command %s', $command->id));
 
         $userExist = null !== $this->userRepository->find($command->id);
         if ($userExist) {
