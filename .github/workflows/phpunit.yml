@@ -13,7 +13,8 @@ jobs:
             - name: Set up PHP
               uses: shivammathur/setup-php@master
               with:
-                  coverage: "none"
+                php-version: '8.3'
+                coverage: "none"
 
             - uses: ramsey/composer-install@v2
 
