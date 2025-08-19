@@ -29,14 +29,13 @@
         "symfony/yaml": "6.4.*"
     },
     "require-dev": {
+        "deptrac/deptrac": "^4.0",
         "friendsofphp/php-cs-fixer": "^3.34",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^9.6",
-        "deptrac/deptrac": "^4.0",
         "rector/rector": "^2.1",
         "symfony/stopwatch": "6.4.*",
-        "symfony/web-profiler-bundle": "6.4.*",
-        "vimeo/psalm": "^6.13"
+        "symfony/web-profiler-bundle": "6.4.*"
     },
     "config": {
         "allow-plugins": {
