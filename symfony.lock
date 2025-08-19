@@ -1,4 +1,16 @@
 {
+    "deptrac/deptrac": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "05ab8813714080c7bc915cb10c780e6cfdbdb991"
+        },
+        "files": [
+            "deptrac.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.14",
         "recipe": {
@@ -70,7 +82,7 @@
         ]
     },
     "phpstan/phpstan": {
-        "version": "1.10",
+        "version": "2.1",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
@@ -93,18 +105,6 @@
             ".env.test",
             "phpunit.xml.dist",
             "tests/bootstrap.php"
-        ]
-    },
-    "qossmic/deptrac-shim": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.19",
-            "ref": "3c3daab46226c37fc14e10faf81df737a3039d96"
-        },
-        "files": [
-            "deptrac.yaml"
         ]
     },
     "ramsey/uuid-doctrine": {
