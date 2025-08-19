@@ -7,10 +7,6 @@ services:
         autowire: true
         autoconfigure: true
 
-        bind:
-            $availableSeats: '%env(PLAYGROUND_AVAILABLE_SEATS)'
-            $pricePerSeat: '%env(PRICE_PER_SEAT)'
-
     App\:
         resource: '../src/'
         exclude:

@@ -2,4 +2,3 @@ controllers:
     resource:
         path: ../src/Presentation/Http/Controller/
         namespace: App\Presentation\Http\Controller
-    type: attribute
