@@ -1,0 +1,22 @@
+name: PHP PHPStan
+
+on:
+    push
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@master
+              with:
+                  coverage: "none"
+
+            - uses: ramsey/composer-install@v2
+
+            - name: PHPStan tests
+              run: vendor/bin/phpstan analyse
+
