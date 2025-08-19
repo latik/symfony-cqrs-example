@@ -10,7 +10,6 @@ use App\Domain\Shared\EventInterface;
 use App\Domain\Shared\MessageSubscriberInterface;
 use App\Domain\Shared\UuidFactoryInterface;
 use App\Domain\User\UserConnected;
-use App\Domain\User\UserRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 final readonly class AuctionProcessManager implements MessageSubscriberInterface
@@ -22,7 +21,7 @@ final readonly class AuctionProcessManager implements MessageSubscriberInterface
     ) {
     }
 
-    public function __invoke(EventInterface $event)
+    public function __invoke(EventInterface $event): void
     {
         foreach (self::getHandledMessages() as $className => $config) {
             if ($className === $event::class) {
@@ -34,6 +33,7 @@ final readonly class AuctionProcessManager implements MessageSubscriberInterface
     /**
      * @return \Iterator<array<string, string>>
      */
+    #[\Override]
     public static function getHandledMessages(): \Iterator
     {
         yield UserConnected::class => ['method' => 'handleThatUserConnected', 'bus' => 'event.bus'];
@@ -43,7 +43,7 @@ final readonly class AuctionProcessManager implements MessageSubscriberInterface
     {
         $processId = $this->uuidFactory->generateUuid4();
 
-        $this->logger->info(sprintf('Try start process %s', $processId->toString()));
+        $this->logger->info(\sprintf('Try start process %s', $processId->toString()));
 
         $this->commandBus->dispatch(AuctionStart::create($processId, $event->userId));
     }
