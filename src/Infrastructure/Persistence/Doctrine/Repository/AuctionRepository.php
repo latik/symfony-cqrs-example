@@ -8,6 +8,9 @@ use App\Domain\Auction\Auction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Auction>
+ */
 final class AuctionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

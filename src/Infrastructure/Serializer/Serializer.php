@@ -18,7 +18,7 @@ final readonly class Serializer implements SerializerInterface
         return $this->serializer->serialize($data, $format, $context);
     }
 
-    public function deserialize(mixed $data, string $type, string $format, array $context = [])
+    public function deserialize(mixed $data, string $type, string $format, array $context = []): mixed
     {
         return $this->serializer->deserialize($data, $type, $format, $context);
     }
