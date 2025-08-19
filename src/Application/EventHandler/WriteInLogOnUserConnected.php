@@ -25,6 +25,6 @@ final readonly class WriteInLogOnUserConnected implements EventHandlerInterface
 
         $userJson = $this->serializer->serialize($user, SerializerInterface::JSON_FORMAT);
 
-        $this->logger->info(sprintf('User connected: %s', $userJson));
+        $this->logger->info(\sprintf('User connected: %s', $userJson));
     }
 }

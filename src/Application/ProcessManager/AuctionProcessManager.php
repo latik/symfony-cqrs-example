@@ -43,7 +43,7 @@ final readonly class AuctionProcessManager implements MessageSubscriberInterface
     {
         $processId = $this->uuidFactory->generateUuid4();
 
-        $this->logger->info(sprintf('Try start process %s', $processId->toString()));
+        $this->logger->info(\sprintf('Try start process %s', $processId->toString()));
 
         $this->commandBus->dispatch(AuctionStart::create($processId, $event->userId));
     }
