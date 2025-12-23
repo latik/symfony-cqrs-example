@@ -9,11 +9,6 @@ services:
 
     App\:
         resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
-            - '../src/Tests/'
 
     App\CommandHandler\:
         namespace: App\Application\CommandHandler\

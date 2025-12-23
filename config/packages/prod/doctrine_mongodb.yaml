@@ -1,3 +1,2 @@
 doctrine_mongodb:
-    auto_generate_proxy_classes: false
     auto_generate_hydrator_classes: false

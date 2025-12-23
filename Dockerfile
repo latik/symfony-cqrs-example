@@ -7,7 +7,7 @@ RUN install-php-extensions \
     pdo_pgsql \
     mongodb \
     opcache \
-    amqp \
+    php-amqp/php-amqp@latest \
 ;
 
 COPY docker/php/entry_point.sh /entry_point.sh
