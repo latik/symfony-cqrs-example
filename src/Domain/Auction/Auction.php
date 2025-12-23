@@ -22,7 +22,7 @@ class Auction
 
     public static function start(UuidInterface $processId, array $payload): self
     {
-        $instance = new self(processId: $processId, payload: $payload, finishedAt: null);
+        $instance = new self(processId: $processId, payload: $payload);
         $instance->record(new AuctionStarted($processId));
 
         return $instance;

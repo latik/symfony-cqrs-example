@@ -13,7 +13,7 @@ final readonly class Normalizer implements DenormalizerInterface
     {
     }
 
-    public function denormalize($data, string $type, ?string $format = null, array $context = [])
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): mixed
     {
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
