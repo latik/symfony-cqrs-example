@@ -41,7 +41,7 @@ final readonly class AuctionProcessManager implements MessageSubscriberInterface
 
     public function handleThatUserConnected(UserConnected $event): void
     {
-        $processId = $this->uuidFactory->generateUuid4();
+        $processId = $this->uuidFactory->generate();
 
         $this->logger->info(\sprintf('Try start process %s', $processId->toString()));
 
