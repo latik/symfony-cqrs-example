@@ -6,5 +6,5 @@ namespace App\Domain\Shared;
 
 interface UuidFactoryInterface
 {
-    public function generateUuid4(): UuidInterface;
+    public function generate(): UuidInterface;
 }
