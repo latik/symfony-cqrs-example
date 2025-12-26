@@ -9,8 +9,8 @@ use App\Domain\Shared\UuidInterface;
 
 final class UuidFactory implements UuidFactoryInterface
 {
-    public function generateUuid4(): UuidInterface
+    public function generate(): UuidInterface
     {
-        return RamseyUuid::uuid4();
+        return SymfonyUuid::uuid4();
     }
 }
