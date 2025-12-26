@@ -14,16 +14,16 @@ final class InMemoryAuctionRepository
 
     public function find(AbstractUid $processId): ?Auction
     {
-        if (!$this->hasState($processId->__toString())) {
+        if (!$this->hasState($processId->toString())) {
             return null;
         }
 
-        return self::$states[$processId->__toString()];
+        return self::$states[$processId->toString()];
     }
 
     public function save(Auction $state): void
     {
-        self::$states[$state->processId()->__toString()] = $state;
+        self::$states[$state->processId()->toString()] = $state;
     }
 
     public function reset(): void
