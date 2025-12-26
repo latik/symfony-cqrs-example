@@ -16,6 +16,6 @@ final readonly class WriteInLogOnAuctionStarted implements EventHandlerInterface
 
     public function __invoke(AuctionStarted $event): void
     {
-        $this->logger->info(\sprintf('Auction started: %s', $event->id->toString()));
+        $this->logger->info(\sprintf('Auction started: %s', $event->id));
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Shared;
 
-interface UuidInterface
+interface UuidInterface extends \Stringable
 {
-    public function toString(): string;
 }

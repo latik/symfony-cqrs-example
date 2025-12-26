@@ -8,24 +8,24 @@ use App\Domain\Shared\UuidInterface;
 use Stringable;
 use Symfony\Component\Uid\Uuid;
 
-final readonly class SymfonyUuid implements UuidInterface, Stringable
+final readonly class SymfonyUuid implements UuidInterface
 {
     private function __construct(private Uuid $uuid)
     {
     }
 
-    public static function uuid4(): self
+    public static function uuid(): self
     {
-        return new self(Uuid::v4());
+        return new self(Uuid::v7());
     }
 
-    public function toString(): string
+    public static function fromString(string $uuid): self
     {
-        return $this->uuid->toRfc4122();
+        return new self(Uuid::fromString($uuid));
     }
 
     public function __toString(): string
     {
-        return $this->toString();
+        return $this->uuid->__toString();
     }
 }

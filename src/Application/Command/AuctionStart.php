@@ -11,12 +11,12 @@ final readonly class AuctionStart implements CommandInterface
 {
     public function __construct(
         public UuidInterface $id,
-        public int $userId,
+        public UuidInterface $userId,
     ) {
     }
 
-    public static function create(UuidInterface $uuid4, int $userId): self
+    public static function create(UuidInterface $uuid, UuidInterface $userId): self
     {
-        return new self(id: $uuid4, userId: $userId);
+        return new self(id: $uuid, userId: $userId);
     }
 }

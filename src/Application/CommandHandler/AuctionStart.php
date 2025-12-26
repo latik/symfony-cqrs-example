@@ -22,7 +22,7 @@ final readonly class AuctionStart implements CommandHandlerInterface
 
     public function __invoke(AuctionStartCommand $command): void
     {
-        $this->logger->info(\sprintf('Try start process %s', $command->id->toString()));
+        $this->logger->info(\sprintf('Try start process %s', $command->id));
 
         $auction = Auction::start($command->id, [$command->userId]);
 
