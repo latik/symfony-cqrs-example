@@ -9,7 +9,7 @@ use App\Domain\Shared\UuidInterface;
 
 final readonly class UserCreated implements EventInterface
 {
-    public function __construct(public int $userId)
+    public function __construct(public UuidInterface $userId)
     {
     }
 }

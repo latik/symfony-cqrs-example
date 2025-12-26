@@ -7,4 +7,6 @@ namespace App\Domain\Shared;
 interface UuidFactoryInterface
 {
     public function generate(): UuidInterface;
+
+    public function fromString(string $uuid): UuidInterface;
 }

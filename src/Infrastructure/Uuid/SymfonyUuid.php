@@ -14,9 +14,14 @@ final readonly class SymfonyUuid implements UuidInterface, Stringable
     {
     }
 
-    public static function uuid4(): self
+    public static function uuid(): self
     {
-        return new self(Uuid::v4());
+        return new self(Uuid::v7());
+    }
+
+    public static function fromString(string $uuid): self
+    {
+        return new self(Uuid::fromString($uuid));
     }
 
     public function toString(): string

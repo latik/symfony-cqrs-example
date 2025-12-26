@@ -8,6 +8,7 @@ use App\Application\Command\UserCreate;
 use App\Domain\Shared\CommandBusInterface;
 use App\Domain\Shared\DenormalizerInterface;
 use App\Domain\Shared\SerializerInterface;
+use App\Domain\Shared\UuidFactoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,24 +25,28 @@ final class UserCreateCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('id', InputArgument::REQUIRED, 'The user ID');
+            ->addArgument('id', InputArgument::OPTIONAL, 'The user ID');
     }
 
     public function __construct(
         private readonly CommandBusInterface $commandBus,
-        private readonly DenormalizerInterface $denormalizer,
         private readonly ValidatorInterface $validator,
+        private readonly DenormalizerInterface $denormalizer,
         private readonly SerializerInterface $serializer,
+        private readonly UuidFactoryInterface $uuidFactory,
     ) {
         parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $userId = (int) $input->getArgument('id');
-        $data = array_merge($input->getArguments(), ['id' => $userId]);
+        $userId = $input->hasArgument('id')
+            ? $this->uuidFactory->fromString((string) $input->getArgument('id'))
+            : $this->uuidFactory->generate();
 
-        $output->writeln(\sprintf('id: %s'.PHP_EOL, $userId));
+        $output->writeln(\sprintf('id: %s'.PHP_EOL, $userId->toString()));
+
+        $data = array_merge($input->getArguments(), ['id' => $userId]);
 
         /** @var UserCreate $command */
         $command = $this->denormalizer->denormalize($data, UserCreate::class);

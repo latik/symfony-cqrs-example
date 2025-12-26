@@ -5,21 +5,23 @@ declare(strict_types=1);
 namespace App\Domain\User;
 
 use App\Domain\Shared\EventsRecorderTrait;
-
+use App\Domain\Shared\UuidInterface;
 class User
 {
     use EventsRecorderTrait;
 
-    private const CONNECTED = 'connected';
-    private const DISCONNECTED = 'disconnected';
+    private const string CONNECTED = 'connected';
+    private const string DISCONNECTED = 'disconnected';
 
-    public string $status = self::DISCONNECTED;
+    private(set) string $status = self::DISCONNECTED {
+        get => $this->status;
+    }
 
-    private function __construct(public readonly int $id)
+    private function __construct(public readonly UuidInterface $id)
     {
     }
 
-    public static function create(int $id): self
+    public static function create(UuidInterface $id): self
     {
         $instance = new self(id: $id);
 
@@ -33,10 +35,5 @@ class User
         $this->status = self::CONNECTED;
 
         $this->record(new UserConnected(userId: $this->id));
-    }
-
-    public function status(): string
-    {
-        return $this->status;
     }
 }

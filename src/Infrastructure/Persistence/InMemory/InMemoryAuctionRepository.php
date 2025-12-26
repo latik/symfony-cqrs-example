@@ -14,7 +14,7 @@ final class InMemoryAuctionRepository
 
     public function find(UuidInterface $processId): ?Auction
     {
-        if (!$this->hasState($processId)) {
+        if (!$this->hasState($processId->toString())) {
             return null;
         }
 
@@ -31,8 +31,8 @@ final class InMemoryAuctionRepository
         self::$states = [];
     }
 
-    private function hasState(UuidInterface $processId): bool
+    private function hasState(string $processId): bool
     {
-        return isset(self::$states[$processId->toString()]);
+        return isset(self::$states[$processId]);
     }
 }

@@ -26,7 +26,7 @@ final class UserController extends AbstractController
     #[Route(path: '/', name: 'connect')]
     public function connect() : JsonResponse
     {
-        $data = ['id' => 42];
+        $data = ['id' => 'd9e7a184-5d5b-11ea-a62a-3499710062d0'];
 
         /** @var UserConnect $command */
         $command = $this->denormalizer->denormalize($data, UserConnect::class);
@@ -36,7 +36,7 @@ final class UserController extends AbstractController
             return $this->json(['msg' => 'Not valid id'], 400);
         }
 
-        $this->logger->info(\sprintf('User %s try to connect', $command->id));
+        $this->logger->info(\sprintf('User %s try to connect', $command->id->toString()));
 
         $this->commandBus->dispatch($command);
 

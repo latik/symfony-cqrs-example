@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\InMemory;
 
+use App\Domain\Shared\UuidInterface;
 use App\Domain\User\User;
-use App\Domain\User\UserRepositoryInterface;
 
 final class InMemoryUserRepository // implements UserRepositoryInterface
 {
@@ -14,19 +14,19 @@ final class InMemoryUserRepository // implements UserRepositoryInterface
      */
     private array $users = [];
 
-    public function find(int $id): ?User
+    public function find(UuidInterface $id): ?User
     {
-        return $this->users[$id] ?? null;
+        return $this->users[$id->toString()] ?? null;
     }
 
     public function store(User $user): void
     {
-        $this->users[$user->id] = $user;
+        $this->users[$user->id->toString()] = $user;
     }
 
     public function remove(User $user): void
     {
-        unset($this->users[$user->id]);
+        unset($this->users[$user->id->toString()]);
     }
 
     /**

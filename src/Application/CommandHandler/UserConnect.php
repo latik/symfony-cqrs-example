@@ -23,7 +23,7 @@ final readonly class UserConnect implements EventHandlerInterface
 
     public function __invoke(UserConnectCommand $command): void
     {
-        $this->logger->info(\sprintf('Execute UserConnect command %s', $command->id));
+        $this->logger->info(\sprintf('Execute UserConnect command %s', $command->id->toString()));
 
         $user = $this->userRepository->find($command->id);
         if (!$user instanceof User) {

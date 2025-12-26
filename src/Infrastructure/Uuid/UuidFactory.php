@@ -11,6 +11,11 @@ final class UuidFactory implements UuidFactoryInterface
 {
     public function generate(): UuidInterface
     {
-        return SymfonyUuid::uuid4();
+        return SymfonyUuid::uuid();
+    }
+
+    public function fromString(string $uuid): UuidInterface
+    {
+        return SymfonyUuid::fromString($uuid);
     }
 }

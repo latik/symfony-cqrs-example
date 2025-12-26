@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence;
 
+use App\Domain\Shared\UuidInterface;
 use App\Domain\User\User;
 use App\Domain\User\UserRepositoryInterface;
-use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as DoctrineUserRepository;
+use App\Infrastructure\Persistence\Doctrine\Repository\SqlUserRepository as Repository;
 
 final readonly class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(private DoctrineUserRepository $doctrineRepository)
+    public function __construct(private Repository $doctrineRepository)
     {
     }
 
-    public function find(int $id): ?User
+    public function find(UuidInterface $id): ?User
     {
         return $this->doctrineRepository->find($id);
     }
