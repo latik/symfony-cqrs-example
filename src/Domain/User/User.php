@@ -16,7 +16,7 @@ class User
 
     public string $status = self::DISCONNECTED;
 
-    private function __construct(public AbstractUid $id)
+    private function __construct(public readonly AbstractUid $id)
     {
     }
 
