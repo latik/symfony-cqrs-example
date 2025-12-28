@@ -1,4 +1,4 @@
-DOCKER-COMPOSE	= docker-compose -f docker-compose.yml
+DOCKER-COMPOSE	= docker-compose -f compose.yml
 EXEC_APP 		= $(DOCKER-COMPOSE) exec app
 SYMFONY 		= $(EXEC_APP) bin/console
 

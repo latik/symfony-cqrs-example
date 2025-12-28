@@ -7,7 +7,7 @@
         <id name="processId" column="processId" type="uuid">
             <generator strategy="NONE"/>
         </id>
-        <field name="payload" column="payload" type="array"/>
+        <field name="payload" column="payload" type="jsonb"/>
         <field name="finishedAt" column="finishedAt" type="datetime_immutable" nullable="true"/>
     </entity>
 
