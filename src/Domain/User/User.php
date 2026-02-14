@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\User;
 
 use App\Domain\Shared\EventsRecorderTrait;
-use App\Domain\Shared\UuidInterface;
 
 class User
 {
@@ -18,11 +17,11 @@ class User
         get => $this->status;
     }
 
-    private function __construct(public readonly UuidInterface $id)
+    private function __construct(public readonly UserId $id)
     {
     }
 
-    public static function create(UuidInterface $id): self
+    public static function create(UserId $id): self
     {
         $instance = new self(id: $id);
 

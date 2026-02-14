@@ -6,6 +6,7 @@ namespace App\Infrastructure\Persistence\InMemory;
 
 use App\Domain\Shared\UuidInterface;
 use App\Domain\User\User;
+use App\Domain\User\UserId;
 
 final class InMemoryUserRepository // implements UserRepositoryInterface
 {
@@ -14,7 +15,7 @@ final class InMemoryUserRepository // implements UserRepositoryInterface
      */
     private array $users = [];
 
-    public function find(UuidInterface $id): ?User
+    public function find(UserId $id): ?User
     {
         return $this->users[(string) $id] ?? null;
     }

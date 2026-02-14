@@ -9,6 +9,7 @@ use App\Domain\Shared\CommandBusInterface;
 use App\Domain\Shared\DenormalizerInterface;
 use App\Domain\Shared\SerializerInterface;
 use App\Domain\Shared\UuidFactoryInterface;
+use App\Domain\User\UserId;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -46,7 +47,7 @@ final class UserCreateCommand extends Command
 
         $output->writeln(\sprintf('id: %s'.PHP_EOL, $userId));
 
-        $data = array_merge($input->getArguments(), ['id' => $userId]);
+        $data = array_merge($input->getArguments(), ['id' =>  UserId::create($userId)]);
 
         /** @var UserCreate $command */
         $command = $this->denormalizer->denormalize($data, UserCreate::class);
