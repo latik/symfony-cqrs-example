@@ -8,6 +8,7 @@ use App\Application\Command\UserConnect;
 use App\Domain\Shared\CommandBusInterface;
 use App\Domain\Shared\SerializerInterface;
 use App\Domain\Shared\UuidFactoryInterface;
+use App\Domain\User\UserId;
 use App\Domain\User\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -40,7 +41,7 @@ final class UserConnectCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $userId = $this->uuidFactory->fromString((string) $input->getArgument('id'));
+        $userId = UserId::create($this->uuidFactory->fromString((string) $input->getArgument('id')));
 
         $output->writeln(\sprintf('id: %s'.PHP_EOL, $userId));
 

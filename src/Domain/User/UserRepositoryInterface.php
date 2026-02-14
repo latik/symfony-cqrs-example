@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
-use App\Domain\Shared\UuidInterface;
-
 interface UserRepositoryInterface
 {
-    public function find(UuidInterface $id): ?User;
+    public function find(UserId $id): ?User;
 
     /**
      * @return array<User>
