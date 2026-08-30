@@ -8,3 +8,8 @@ when@prod:
     framework:
         router:
             strict_requirements: null
+
+when@test:
+    framework:
+        router:
+            strict_requirements: true

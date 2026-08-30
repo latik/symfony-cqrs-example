@@ -10,6 +10,11 @@ RUN install-php-extensions \
     php-amqp/php-amqp@latest \
 ;
 
+ARG BUILD_WITH_XDEBUG=0
+RUN if [ ${BUILD_WITH_XDEBUG} = 1 ]; then \
+   IPE_DONT_ENABLE=1 install-php-extensions xdebug \
+;fi
+
 COPY docker/php/entry_point.sh /entry_point.sh
 
 COPY docker/php/php.ini /usr/local/etc/php/php.ini

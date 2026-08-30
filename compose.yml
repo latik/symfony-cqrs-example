@@ -1,13 +1,18 @@
 x-app-template: &app-template
     image: cqrs-example_app:latest
-    build: .
+    build:
+        context: .
+        dockerfile: docker/php/Dockerfile
+        args:
+            BUILD_WITH_XDEBUG: 1
     working_dir: /var/www
     environment:
         TIMEZONE: Europe/Kiev
         MESSENGER_TRANSPORT_DSN: amqp://guest:guest@queue:5672/%2f/messages
-        DATABASE_URL: pgsql://postgres:admin@database:5432/symfony
+        DATABASE_URL: pgsql://app:!ChangeMe!@database:5432/app?serverVersion=18&charset=utf8
         MONGODB_URL: mongodb://mongo:27017
         MONGODB_DB: symfony
+        PHP_ENABLE_XDEBUG: 1
     volumes:
         - .:/var/www:cached
     depends_on:
@@ -45,6 +50,8 @@ services:
         POSTGRES_DB: ${POSTGRES_DB:-app}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
         POSTGRES_USER: ${POSTGRES_USER:-app}
+      volumes:
+          - db_data:/var/lib/postgresql/data:rw
       healthcheck:
         test: [ "CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}" ]
         timeout: 5s
@@ -55,3 +62,6 @@ services:
 
 networks:
     webnet:
+
+volumes:
+    db_data: {}
